@@ -1,0 +1,44 @@
+/* Custom CSS for ZakatEase */
+
+/* Hide number input spinners plugin */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
+  appearance: textfield;
+  /* Standard */
+}
+
+/* Smooth scrolling behavior for entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Islamic patterned section utility class if needed */
+.islamic-pattern-bg {
+  background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
+  background-repeat: repeat;
+}
+
+/* Urdu specific typography tweaks */
+.font-urdu {
+  line-height: 1.8;
+}
+
+/* Card glassmorphism utility (fallback if tailwind classes get too long) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dark .glass-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
