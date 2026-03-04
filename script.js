@@ -162,17 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             const usd = data.usd;
 
-            if (usd && usd.pkr) {
-                // Free public metal APIs often report anomalies or require paid keys.
-                // We calculate using a standard base USD per Ounce for accuracy, multiplied by live currency rates.
+            if (usd && usd.pkr && usd.xau && usd.xag) {
+                // XAU and XAG are live prices representing Troy Ounce per USD.
                 // 1 Troy Ounce = 31.1034768 grams.
-                const baseGoldOunceUSD = 2700; // Realistic recent base
-                const baseSilverOunceUSD = 32;   // Realistic recent base
+                const goldPerGramUSD = (1 / usd.xau) / 31.1034768;
+                const silverPerGramUSD = (1 / usd.xag) / 31.1034768;
 
-                const goldPerGramUSD = baseGoldOunceUSD / 31.1034768;
-                const silverPerGramUSD = baseSilverOunceUSD / 31.1034768;
-
-                // Update Rates Object mathematically ensuring PKR/SAR equivalents accurately reflect localized market parity
+                // Update Rates Object with live currency rates
                 rates.PKR.gold = goldPerGramUSD * usd.pkr;
                 rates.PKR.silver = silverPerGramUSD * usd.pkr;
 
@@ -192,6 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call on load
     fetchLiveRates();
+
+    // Automatically update rates every 5 minutes (300,000 milliseconds) for true live experience
+    setInterval(fetchLiveRates, 300000);
 
     // 6. Save Record (LocalStorage Mockup)
     document.getElementById('save-record').addEventListener('click', () => {
