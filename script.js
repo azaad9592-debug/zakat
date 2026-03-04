@@ -154,6 +154,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize display
     updateRatesDisplay();
 
+    // 5.5 Fetch Live Rates
+    async function fetchLiveRates() {
+        try {
+            // Using a free, reliable CDN for daily exchange rates which includes precious metals
+            const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json');
+            const data = await response.json();
+            const usd = data.usd;
+
+            if (usd && usd.xau && usd.xag) {
+                // XAU and XAG are in Troy Ounces per USD.
+                // 1 Troy Ounce = 31.1034768 grams.
+                const goldPerGramUSD = (1 / usd.xau) / 31.1034768;
+                const silverPerGramUSD = (1 / usd.xag) / 31.1034768;
+
+                // Update Rates Object
+                rates.PKR.gold = goldPerGramUSD * usd.pkr;
+                rates.PKR.silver = silverPerGramUSD * usd.pkr;
+
+                rates.USD.gold = goldPerGramUSD;
+                rates.USD.silver = silverPerGramUSD;
+
+                rates.SAR.gold = goldPerGramUSD * usd.sar;
+                rates.SAR.silver = silverPerGramUSD * usd.sar;
+
+                // Refresh UI with new live rates
+                updateRatesDisplay();
+            }
+        } catch (error) {
+            console.error("Failed to fetch live rates, falling back to static rates:", error);
+        }
+    }
+
+    // Call on load
+    fetchLiveRates();
+
     // 6. Save Record (LocalStorage Mockup)
     document.getElementById('save-record').addEventListener('click', () => {
         const record = {
