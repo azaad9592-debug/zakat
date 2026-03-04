@@ -184,6 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Refresh UI with new live rates
                 updateRatesDisplay();
+
+                // Update the visual timestamp automatically
+                const timeEl = document.getElementById('last-updated-time');
+                if (timeEl) {
+                    const now = new Date();
+                    timeEl.innerText = 'Last Updated: ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' (' + now.toLocaleDateString() + ')';
+                }
             }
         } catch (error) {
             console.error("Failed to fetch live rates, falling back to static rates:", error);
