@@ -112,10 +112,28 @@
                     </button>
 
                     <!-- Mobile Menu Button -->
-                    <button class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
                         <i class="ph ph-list text-2xl"></i>
                     </button>
                 </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <nav class="flex flex-col space-y-3 font-sans font-medium text-center">
+                    <a href="#home"
+                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Home</a>
+                    <a href="#calculator"
+                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Calculator</a>
+                    <a href="#rules"
+                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Sharia
+                        Rules</a>
+                    <a href="#quran"
+                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Quran
+                        & Hadith</a>
+                    <a href="#contact"
+                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Contact</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -202,7 +220,7 @@
                             اور چاندی کی قیمت</h3>
                         <p class="text-slate-600 dark:text-slate-400 font-sans text-sm">Real-time market rates for Nisab
                             calculation (Live Updates) <br /><span id="last-updated-time"
-                                class="text-emerald-500 font-bold text-xs">Loading Live Time...</span></p>
+                                class="text-emerald-500 font-bold text-xs">لوڈنگ...</span></p>
                     </div>
 
                     <div class="flex gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
@@ -216,7 +234,7 @@
                                 <p class="text-sm font-bold text-slate-500 dark:text-slate-400 font-sans uppercase">Gold
                                     (24K)</p>
                                 <p class="text-xl font-bold text-slate-800 dark:text-white font-sans"><span
-                                        id="live-gold-rate">Loading...</span> <span
+                                        id="live-gold-rate">لوڈنگ...</span> <span
                                         class="text-xs text-slate-500 font-urdu">فی تولہ</span></p>
                             </div>
                         </div>
@@ -231,7 +249,7 @@
                                 <p class="text-sm font-bold text-slate-500 dark:text-slate-400 font-sans uppercase">
                                     Silver</p>
                                 <p class="text-xl font-bold text-slate-800 dark:text-white font-sans"><span
-                                        id="live-silver-rate">Loading...</span> <span
+                                        id="live-silver-rate">لوڈنگ...</span> <span
                                         class="text-xs text-slate-500 font-urdu">فی تولہ</span></p>
                             </div>
                         </div>
@@ -879,7 +897,7 @@
     </footer>
 
     <!-- Custom JS -->
-    <script src="script.js?v=130"></script>
+    <script src="app.js?v=1"></script>
 </body>
 
 </html>
