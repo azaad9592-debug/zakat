@@ -129,9 +129,42 @@ h2.font-urdu { line-height: 1.3 !important; }
 
 /* Responsive Grid Adjustments */
 @media (max-width: 768px) {
-  .font-urdu { font-size: 1.15rem; line-height: 2.2; }
-  .glass-card { border-radius: 20px; }
+  .font-urdu { 
+    font-size: 1.25rem; 
+    line-height: 4 !important; /* Forces massive gap for Nastaleeq shoshas/dots */
+  }
+  
+  h1.font-urdu, h2.font-urdu {
+    line-height: 5 !important; /* Extreme gap for large headings */
+    margin-bottom: 2rem;
+  }
+
+  .urdu-heading-glow {
+    line-height: 4.5 !important;
+  }
+
+  /* Fix market rates alignment to 2 columns on mobile */
+  .market-rates-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+    text-align: center;
+  }
+  
+  .market-rates-item {
+    border-right: none !important;
+    padding-right: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 1rem;
+  }
+
+  .glass-card { border-radius: 20px; padding: 1.5rem !important; }
   .hero-image-frame { border-width: 6px; border-radius: 20px; }
+  
+  header .max-w-7xl {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 }
 
 /* Specific Section Styles */

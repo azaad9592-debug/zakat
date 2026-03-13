@@ -161,30 +161,30 @@
 
     <!-- Gold/Silver Ribbon -->
     <div class="max-w-6xl mx-auto -mt-10 relative z-10 px-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
             
-            <!-- Metadata on Right (Start in RTL) -->
-            <div class="flex items-center gap-4 bg-primary-50 dark:bg-primary-900/10 rounded-xl py-4 px-8 border border-primary-100 dark:border-primary-800/30">
+            <!-- Metadata Area -->
+            <div class="flex items-center gap-4 bg-primary-50 dark:bg-primary-900/10 rounded-xl py-4 px-6 border border-primary-100 dark:border-primary-800/30 w-full md:w-auto justify-center md:justify-start">
                 <span class="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
                 <div class="flex flex-col text-right">
-                    <span class="text-[11px] font-bold text-primary uppercase tracking-widest">LIVE MARKET RATES</span>
-                    <span class="text-sm font-urdu text-slate-700 dark:text-slate-300 font-bold">آخری اپڈیٹ: <span id="last-updated-ts" class="font-sans text-primary">--:--</span></span>
+                    <span class="text-[10px] font-bold text-primary uppercase tracking-widest">LIVE MARKET RATES</span>
+                    <span class="text-xs md:text-sm font-urdu text-slate-700 dark:text-slate-300 font-bold">آخری اپڈیٹ: <span id="last-updated-ts" class="font-sans text-primary">--:--</span></span>
                 </div>
             </div>
 
-            <!-- Rates on Left (End in RTL) -->
-            <div class="flex flex-wrap items-center gap-10">
-                <div class="flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
+            <!-- Rates Grid (Responsive) -->
+            <div class="market-rates-grid flex flex-wrap items-center gap-8 md:gap-10 w-full justify-center md:justify-end">
+                <div class="market-rates-item flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">GOLD 24B (TOLA)</span>
-                    <span id="live-gold-rate" class="text-2xl font-black text-primary font-sans">---</span>
+                    <span id="live-gold-rate" class="text-xl md:text-2xl font-black text-primary font-sans">---</span>
                 </div>
-                <div class="flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
+                <div class="market-rates-item flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">SILVER (TOLA)</span>
-                    <span id="live-silver-rate" class="text-2xl font-black text-slate-600 dark:text-slate-400 font-sans">---</span>
+                    <span id="live-silver-rate" class="text-xl md:text-2xl font-black text-slate-600 dark:text-slate-400 font-sans">---</span>
                 </div>
-                <div class="flex flex-col">
+                <div class="market-rates-item flex flex-col">
                     <span class="text-[10px] font-bold text-amber-600 uppercase tracking-[0.2em] mb-1">BITCOIN (BTC)</span>
-                    <span id="live-btc-rate" class="text-2xl font-black text-amber-500 font-sans">---</span>
+                    <span id="live-btc-rate" class="text-xl md:text-2xl font-black text-amber-500 font-sans">---</span>
                 </div>
             </div>
 
@@ -489,21 +489,21 @@
                         </div>
 
                         <!-- Hadith Quote -->
-                        <div class="bg-amber-50/30 dark:bg-amber-900/10 p-10 md:p-14 rounded-[3rem] border-r-8 border-gold shadow-xl hover:shadow-2xl transition-all duration-500">
+                        <div class="bg-amber-50/30 dark:bg-amber-900/10 p-6 md:p-14 rounded-[2.5rem] md:rounded-[3rem] border-r-8 border-gold shadow-xl hover:shadow-2xl transition-all duration-500">
                             <div class="flex items-center gap-5 mb-8 justify-start">
                                 <div class="w-14 h-14 bg-gold rounded-2xl flex items-center justify-center text-slate-900 shadow-lg">
                                     <i class="ph-fill ph-book-open text-3xl"></i>
                                 </div>
-                                <h3 class="text-3xl md:text-4xl font-black font-urdu text-gold-700">فرمانِ مصطفیٰ ﷺ</h3>
+                                <h3 class="text-2xl md:text-4xl font-black font-urdu text-gold-700">فرمانِ مصطفیٰ ﷺ</h3>
                             </div>
-                            <p class="font-urdu text-xl md:text-2xl text-slate-800 dark:text-slate-200 mb-8 leading-[2.2]">
+                            <p class="font-urdu text-lg md:text-2xl text-slate-800 dark:text-slate-200 mb-8 leading-loose md:leading-[2.2]">
                                 حضرت ابن عباس رضی اللہ عنہ سے مروی ہے کہ نبی کریم ﷺ نے جب معاذ رضی اللہ عنہ کو یمن بھیجا تو فرمایا:
                             </p>
-                            <div class="bg-white/80 dark:bg-emerald-950/40 p-10 rounded-[2.5rem] border-2 border-gold/20 shadow-inner">
-                                <p class="font-urdu text-2xl md:text-3xl text-slate-900 dark:text-white font-bold mb-6 leading-[2.5]">
+                            <div class="bg-white/90 dark:bg-emerald-950/40 p-6 md:p-10 rounded-[2rem] border-2 border-gold/20 shadow-inner">
+                                <p class="font-urdu text-xl md:text-3xl text-slate-900 dark:text-white font-bold leading-relaxed md:leading-[2.5] text-center md:text-right">
                                     "انہیں بتائیں کہ اللہ نے ان کے مالوں پر زکوٰۃ فرض کی ہے، جو ان کے امیروں سے لی جائے گی اور ان کے غریبوں میں تقسیم کی جائے گی۔"
                                 </p>
-                                <p class="font-urdu text-base opacity-70 text-left font-bold border-t border-gold/10 pt-4">(صحیح بخاری: 1496)</p>
+                                <p class="font-urdu text-sm opacity-60 text-left font-bold border-t border-gold/10 pt-4 mt-6">(صحیح بخاری: 1496)</p>
                             </div>
                         </div>
                     </div>
@@ -516,10 +516,10 @@
     <!-- Recipients Section -->
     <section id="recipients" class="py-24 px-4 bg-white dark:bg-slate-900/50">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-black font-urdu mb-6 text-slate-900 dark:text-white">آٹھ مصارفِ زکوٰۃ</h2>
-                <p class="font-urdu text-slate-600 dark:text-slate-400 text-xl md:text-2xl opacity-90 leading-loose">قرآن کے مطابق ان آٹھ قسم کے لوگوں کو زکات دی جا سکتی ہے</p>
-                <div class="w-24 h-1.5 bg-primary/20 mx-auto rounded-full mt-8"></div>
+            <div class="text-center mb-16 px-4">
+                <h2 class="text-4xl md:text-6xl font-black font-urdu mb-6 text-slate-900 dark:text-white leading-tight">آٹھ مصارفِ زکوٰۃ</h2>
+                <p class="font-urdu text-slate-600 dark:text-slate-400 text-lg md:text-2xl opacity-90 leading-relaxed max-w-2xl mx-auto">قرآن کے مطابق ان آٹھ قسم کے لوگوں کو زکات دی جا سکتی ہے</p>
+                <div class="w-16 h-1 bg-primary/30 mx-auto rounded-full mt-6"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
