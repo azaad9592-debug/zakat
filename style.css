@@ -1,6 +1,40 @@
-/* Custom CSS for ZakatEase */
+/* ZakatEase Premium UI v3.0 - Exact Match Style */
 
-/* Hide number input spinners plugin */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
+/* Fallback Jameel Noori if hosted locally or via common CDN */
+@font-face {
+    font-family: 'Jameel Noori Nastaleeq';
+    src: url('https://cdn.jsdelivr.net/gh/SabbirAndTanim/Jameel-Noori-Nastaleeq-Webfont@master/JameelNooriNastaleeq.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+  --primary-green: #078D5B;
+  --accent-gold: #FFB703;
+  --debt-red: #D00000;
+  --bg-mint: #F0F7F4;
+  --card-shadow: 0px 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Base Nastaliq Setup */
+.font-urdu {
+  font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
+
+.font-arabic {
+  font-family: 'Amiri', serif;
+}
+
+.font-sans {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Hide number input spinners */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -9,36 +43,115 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
-  /* Firefox */
   appearance: textfield;
-  /* Standard */
 }
 
-/* Smooth scrolling behavior for entire page */
+/* Page Scroll Behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom Islamic patterned section utility class if needed */
-.islamic-pattern-bg {
-  background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
-  background-repeat: repeat;
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Urdu specific typography tweaks */
-.font-urdu {
-  line-height: 1.8;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
 
-/* Card glassmorphism utility (fallback if tailwind classes get too long) */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 10px;
+}
+
+/* Premium Card Effects */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.dark .glass-card {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 20px 40px rgba(7, 141, 91, 0.1);
+}
+
+/* Hero background with collage overlay */
+.hero-usd-bg {
+    background-image: linear-gradient(rgba(7, 141, 91, 0.9), rgba(1, 29, 19, 0.95)), 
+                      url('zakatease_usd_background_1773355315431.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Precision Urdu Heading Glow */
+.urdu-heading-glow {
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 183, 3, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.4);
+    line-height: 1.5 !important;
+    letter-spacing: -1px;
+}
+
+.flip-x {
+    transform: scaleX(-1);
+}
+
+.urdu-heading-glow .text-gold {
+    color: #FFB703;
+    text-shadow: 0 0 25px rgba(255, 183, 3, 0.6);
+    display: inline-block;
+    padding-top: 1.5rem; /* Forces space between lines */
+}
+
+/* Orange/Gold Image Frame */
+.hero-image-frame {
+    border: 10px solid #FFB703;
+    border-radius: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* Glass Pill for "100% ACCURATE" */
+.glass-pill {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+    padding: 8px 24px;
+}
+
+/* Typography Overrides */
+h1.font-urdu { line-height: 1.2 !important; }
+h2.font-urdu { line-height: 1.3 !important; }
+
+/* Responsive Grid Adjustments */
+@media (max-width: 768px) {
+  .font-urdu { font-size: 1.15rem; line-height: 2.2; }
+  .glass-card { border-radius: 20px; }
+  .hero-image-frame { border-width: 6px; border-radius: 20px; }
+}
+
+/* Specific Section Styles */
+.debt-section {
+  border: 1px solid rgba(208, 0, 0, 0.2);
+  background: rgba(208, 0, 0, 0.02);
+}
+
+.zakat-due-box {
+  background: var(--primary-green);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(7, 141, 91, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.6s ease forwards;
 }

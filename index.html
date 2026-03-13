@@ -1,903 +1,823 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZakatEase - مکمل اسلامی فنانشل گائیڈ</title>
-
-    <!-- Google Fonts for Urdu & English -->
+    <title>ZakatEase | پریمیم زکوٰۃ کیلکولیٹر</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="آسان اور درست زکوٰۃ کیلکولیٹر۔ شرعی اصولوں کے مطابق اپنے اثاثوں کا حساب لگائیں۔">
+    <meta name="theme-color" content="#078D5B">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Gulzar&family=Noto+Nastaliq+Urdu:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS (CDN) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Tailwind & Custom Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Configuration -->
+    <link rel="stylesheet" href="style.css">
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        emerald: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                        primary: {
+                            DEFAULT: '#078D5B',
+                            50: '#F0F7F4',
+                            100: '#D1E7DD',
+                            200: '#A3D0BC',
+                            300: '#75B99B',
+                            400: '#47A27A',
+                            500: '#078D5B',
+                            600: '#067149',
+                            700: '#045537',
+                            800: '#033925',
+                            900: '#011D13',
                         },
                         gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                            DEFAULT: '#FFB703',
+                            500: '#FFB703',
+                            600: '#E5A503',
+                        },
+                        debt: {
+                            DEFAULT: '#D00000',
+                            50: '#FDECEC',
+                            100: '#FBD9D9',
                         }
                     },
                     fontFamily: {
-                        urdu: ['"Noto Nastaliq Urdu"', 'serif'],
-                        heading: ['"Gulzar"', 'serif'],
-                        sans: ['"Outfit"', 'sans-serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        urdu: ['"Jameel Noori Nastaleeq"', '"Noto Nastaliq Urdu"', 'serif'],
                     }
                 }
             }
         }
     </script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <!-- jsPDF for Report Generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+<body class="bg-[#F8FAF9] dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-500">
 
-<body
-    class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-urdu antialiased transition-colors duration-300">
-
-    <!-- 1. Header Navigation -->
-    <header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-emerald-100 dark:border-emerald-900/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" dir="ltr">
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center text-white shadow-lg border border-emerald-400/30">
-                        <i class="ph ph-moon-stars text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold font-sans tracking-tight text-emerald-800 dark:text-emerald-400">
-                            ZakatEase</h1>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-sans tracking-widest uppercase">
-                            Islamic Finance</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex items-center gap-8 font-sans font-medium">
-                    <a href="#home"
-                        class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Home</a>
-                    <a href="#calculator"
-                        class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Calculator</a>
-                    <a href="#rules" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Sharia
-                        Rules</a>
-                    <a href="#quran" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Quran
-                        & Hadith</a>
-                    <a href="#contact"
-                        class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</a>
-                </nav>
-
-                <!-- Actions -->
+                <!-- Actions (Now Right Side in RTL) -->
                 <div class="flex items-center gap-4">
-                    <!-- Currency Selector -->
-                    <select id="currency-selector"
-                        class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 px-3 text-sm font-sans focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer">
-                        <option value="PKR">PKR 🇵🇰</option>
-                        <option value="USD">USD 🇺🇸</option>
-                        <option value="SAR">SAR 🇸🇦</option>
+                    <select id="currency-selector" class="bg-slate-100 text-slate-600 border-none rounded-lg px-3 py-1.5 text-xs font-bold focus:ring-1 focus:ring-primary outline-none cursor-pointer">
+                        <option value="PKR" class="text-slate-800">PKR (PK)</option>
+                        <option value="USD" class="text-slate-800">USD ($)</option>
+                        <option value="SAR" class="text-slate-800">SAR (ر.س)</option>
                     </select>
-
-                    <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle"
-                        class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300">
-                        <i class="ph ph-moon text-xl block dark:hidden"></i>
-                        <i class="ph ph-sun text-xl hidden dark:block"></i>
+                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-primary transition-colors">
+                        <i class="ph-bold ph-moon dark:hidden text-xl"></i>
+                        <i class="ph-bold ph-sun hidden dark:block text-xl"></i>
                     </button>
-
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
-                        <i class="ph ph-list text-2xl"></i>
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2">
+                        <i class="ph-bold ph-list text-2xl"></i>
                     </button>
                 </div>
-            </div>
 
-            <!-- Mobile Menu Dropdown -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <nav class="flex flex-col space-y-3 font-sans font-medium text-center">
-                    <a href="#home"
-                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Home</a>
-                    <a href="#calculator"
-                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Calculator</a>
-                    <a href="#rules"
-                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Sharia
-                        Rules</a>
-                    <a href="#quran"
-                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Quran
-                        & Hadith</a>
-                    <a href="#contact"
-                        class="mobile-link block py-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">Contact</a>
+                <!-- Desktop Nav (English) - Center -->
+                <nav class="hidden md:flex items-center gap-8 font-sans text-sm font-semibold text-slate-700">
+                    <a href="#" class="hover:text-primary transition-colors">Home</a>
+                    <a href="#calculator" class="hover:text-primary transition-colors">Calculator</a>
+                    <a href="#sharia-rules" class="hover:text-primary transition-colors">Sharia Rules</a>
+                    <a href="#quran-hadith" class="hover:text-primary transition-colors">Quran & Hadith</a>
+                    <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
+                    <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
                 </nav>
+
+                <!-- Logo (Now Left Side in RTL) -->
+                <div class="flex items-center gap-3">
+                    <div class="flex flex-col -space-y-1 text-left">
+                        <span class="text-2xl font-black tracking-tight">
+                            <span class="text-primary">Zakat</span><span class="text-gold">Ease</span>
+                        </span>
+                        <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest tracking-[0.2em]">ISLAMIC FINANCE</span>
+                    </div>
+                    <div class="w-11 h-11 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5">
+                        <img src="zakatease_crescent_logo_v3.png" alt="Icon" class="w-full h-full object-contain">
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section (Header Area) -->
-        <section id="home"
-            class="py-20 relative overflow-hidden bg-emerald-900 text-white lg:min-h-[85vh] flex items-center">
-            <!-- Solid Image Tag to guarantee loading -->
-            <img src="https://images.pexels.com/photos/4386442/pexels-photo-4386442.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                alt="Islamic Finance, Gold Coins and Cash"
-                class="absolute inset-0 w-full h-full object-cover opacity-50">
-
-            <!-- Dark Emerald Overlay for readability -->
-            <div class="absolute inset-0 bg-emerald-950/60 mix-blend-multiply"></div>
-            <!-- Islamic Pattern Overlay -->
-            <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] bg-repeat">
-            </div>
-
-            <div class="max-w-7xl mx-auto px-4 relative z-10 w-full">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-
-                    <!-- Text Content -->
-                    <div class="text-center lg:text-right">
-                        <h2 class="text-4xl md:text-6xl lg:text-7xl font-heading mb-6 leading-normal drop-shadow-xl"
-                            style="line-height: 1.6;">زکات کی
-                            درست ادائیگی، <br /><span class="text-gold-400 block mt-2">شرعی اصولوں کے مطابق</span></h2>
-                        <p class="text-xl md:text-2xl text-emerald-50 mb-10 font-sans leading-relaxed drop-shadow-md">
-                            “ZakatEase” ایک مکمل اسلامی فنانشل گائیڈ ویب پورٹل ہے جس کا بنیادی مقصد مسلمانوں کو زکات کا
-                            درست
-                            حساب اور شرعی رہنمائی فراہم کرنا ہے۔</p>
-                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                            <a href="#calculator"
-                                class="bg-gold-500 hover:bg-gold-600 text-emerald-950 font-bold py-4 px-8 rounded-full text-lg transition-transform hover:scale-105 shadow-[0_0_20px_rgba(245,158,11,0.3)] flex items-center justify-center gap-2">
-                                <i class="ph-fill ph-calculator"></i>
-                                کیلکولیٹر استعمال کریں
-                            </a>
-                            <a href="#rules"
-                                class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-emerald-400/30 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors flex items-center justify-center gap-2">
-                                <i class="ph-fill ph-book-open-text"></i>
-                                شرعی اصول پڑھیں
-                            </a>
-                        </div>
+    <!-- Hero Section (Strict Screenshot Match) -->
+    <section class="hero-usd-bg py-16 md:py-28 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+                <!-- Hero Content (Right Side) -->
+                <div class="w-full lg:w-1/2 text-center lg:text-right order-1">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black font-urdu urdu-heading-glow mb-12">
+                        زکوٰۃ کی درست ادائیگی <br>
+                        <span class="text-gold">شرعی اصولوں کے ساتھ</span>
+                    </h1>
+                    <p class="text-lg md:text-xl font-urdu text-white/90 mb-10 max-w-2xl lg:ml-auto leading-loose opacity-95">
+                        "ZakatEase" ایک مکمل اسلامی فنانشل گائیڈ ویب پورٹل ہے جس کا بنیادی مقصد مسلمانوں کو زکوٰۃ کا درست حساب اور شرعی رہنمائی فراہم کرنا ہے۔
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-end gap-4">
+                        <a href="#sharia-rules" class="px-8 py-4 bg-slate-800/80 hover:bg-slate-900 text-white font-urdu text-xl font-bold rounded-full transition-all flex items-center gap-3">
+                            <i class="ph ph-book-open text-2xl text-gold"></i>
+                            شرعی اصول پڑھیں
+                        </a>
+                        <a href="#calculator" class="px-8 py-4 bg-gold hover:bg-gold-600 text-slate-900 font-urdu text-xl font-bold rounded-full shadow-2xl transition-all flex items-center gap-3">
+                            <i class="ph-bold ph-calculator text-2xl"></i>
+                            کیلکولیٹر استعمال کریں
+                        </a>
                     </div>
-
-                    <!-- Image Content -->
-                    <div class="hidden lg:flex justify-center relative" dir="ltr">
-                        <div
-                            class="relative w-full max-w-[450px] aspect-square rounded-[3rem] overflow-hidden border-8 border-gold-500 shadow-[0_0_50px_rgba(245,158,11,0.4)]">
-                            <!-- Beautiful Gold Coins and Cash Image -->
-                            <img src="https://images.pexels.com/photos/4968636/pexels-photo-4968636.jpeg?auto=compress&cs=tinysrgb&w=800"
-                                alt="Gold Coins and Money" class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Floating Verification Badge -->
-                        <div class="absolute bottom-10 -right-4 glass-card p-5 rounded-3xl shadow-2xl flex items-center gap-4 animate-bounce"
-                            style="animation-duration: 3s; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);">
-                            <div
-                                class="w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center text-3xl shadow-lg border-2 border-gold-400">
-                                <i class="ph-fill ph-check-circle"></i>
-                            </div>
-                            <div>
-                                <p
-                                    class="text-sm text-emerald-50 font-sans uppercase font-bold tracking-widest text-shadow">
-                                    100% Accurate</p>
-                                <p class="text-2xl font-black font-sans text-gold-400">اسلامی اصول</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-        </section>
 
-        <!-- Live Market Rates Section -->
-        <section id="market-rates"
-            class="py-12 bg-white dark:bg-slate-900 border-b border-emerald-100 dark:border-emerald-900/30">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div>
-                        <h3 class="text-2xl font-bold text-emerald-800 dark:text-emerald-400 font-urdu mb-2">لائیو سونے
-                            اور چاندی کی قیمت</h3>
-                        <p class="text-slate-600 dark:text-slate-400 font-sans text-sm">Real-time market rates for Nisab
-                            calculation (Live Updates) <br /><span id="last-updated-time"
-                                class="text-emerald-500 font-bold text-xs">لوڈنگ...</span></p>
-                    </div>
-
-                    <div class="flex gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-                        <!-- Gold Card -->
-                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 min-w-[200px] shadow-sm">
-                            <div
-                                class="w-12 h-12 rounded-full bg-gold-100 text-gold-600 flex items-center justify-center flex-shrink-0">
-                                <i class="ph-fill ph-coins text-2xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-bold text-slate-500 dark:text-slate-400 font-sans uppercase">Gold
-                                    (24K)</p>
-                                <p class="text-xl font-bold text-slate-800 dark:text-white font-sans"><span
-                                        id="live-gold-rate">لوڈنگ...</span> <span
-                                        class="text-xs text-slate-500 font-urdu">فی تولہ</span></p>
-                            </div>
+                <!-- Hero Image Frame (Now Second for RTL Left Alignment) -->
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end order-2">
+                    <div class="relative w-full max-w-lg">
+                        <div class="hero-image-frame aspect-square md:aspect-video lg:aspect-square">
+                            <img src="zakatease_hero_hands_money_1773355334520.png" alt="Zakat" class="w-full h-full object-cover">
                         </div>
-
-                        <!-- Silver Card -->
-                        <div class="glass-card rounded-2xl p-4 flex items-center gap-4 min-w-[200px] shadow-sm">
-                            <div
-                                class="w-12 h-12 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center flex-shrink-0">
-                                <i class="ph-fill ph-coin text-2xl"></i>
+                        
+                        <!-- Floating 100% Accurate Pill -->
+                        <div class="absolute -bottom-6 right-6 glass-pill flex items-center gap-3">
+                            <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white">
+                                <i class="ph-bold ph-check text-sm"></i>
                             </div>
-                            <div>
-                                <p class="text-sm font-bold text-slate-500 dark:text-slate-400 font-sans uppercase">
-                                    Silver</p>
-                                <p class="text-xl font-bold text-slate-800 dark:text-white font-sans"><span
-                                        id="live-silver-rate">لوڈنگ...</span> <span
-                                        class="text-xs text-slate-500 font-urdu">فی تولہ</span></p>
+                            <div class="flex flex-col leading-tight">
+                                <span class="text-[10px] text-white/60 font-sans font-bold uppercase tracking-wider">100% ACCURATE</span>
+                                <span class="text-sm text-white font-urdu">اسلامی اصول</span>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Smart Zakat Calculator Section -->
-        <section id="calculator" class="py-20 bg-slate-50 dark:bg-slate-800/50">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <span
-                        class="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 font-bold text-sm tracking-wide mb-6 font-sans">CORE
-                        FEATURE</span>
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white mb-8 leading-normal"
-                        style="line-height: 1.6;">اسمارٹ
-                        زکات کیلکولیٹر</h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">اپنے اثاثوں
-                        کی تفصیلات درج
-                        کریں اور فورا معلوم کریں کہ آپ پر کتنی زکات واجب ہے۔ یہ نظام خود بخود نصاب کا حساب لگاتا ہے۔</p>
+    <!-- Gold/Silver Ribbon -->
+    <div class="max-w-6xl mx-auto -mt-10 relative z-10 px-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <!-- Metadata on Right (Start in RTL) -->
+            <div class="flex items-center gap-4 bg-primary-50 dark:bg-primary-900/10 rounded-xl py-4 px-8 border border-primary-100 dark:border-primary-800/30">
+                <span class="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
+                <div class="flex flex-col text-right">
+                    <span class="text-[11px] font-bold text-primary uppercase tracking-widest">LIVE MARKET RATES</span>
+                    <span class="text-sm font-urdu text-slate-700 dark:text-slate-300 font-bold">آخری اپڈیٹ: <span id="last-updated-ts" class="font-sans text-primary">--:--</span></span>
                 </div>
+            </div>
 
-                <div class="grid lg:grid-cols-3 gap-8 items-start">
+            <!-- Rates on Left (End in RTL) -->
+            <div class="flex flex-wrap items-center gap-10">
+                <div class="flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">GOLD 24B (TOLA)</span>
+                    <span id="live-gold-rate" class="text-2xl font-black text-primary font-sans">---</span>
+                </div>
+                <div class="flex flex-col border-r border-slate-100 dark:border-slate-800 pr-8">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">SILVER (TOLA)</span>
+                    <span id="live-silver-rate" class="text-2xl font-black text-slate-600 dark:text-slate-400 font-sans">---</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-[0.2em] mb-1">BITCOIN (BTC)</span>
+                    <span id="live-btc-rate" class="text-2xl font-black text-amber-500 font-sans">---</span>
+                </div>
+            </div>
 
-                    <!-- Form Area (2 Columns wide) -->
-                    <div
-                        class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-6 md:p-10 shadow-xl border border-slate-100 dark:border-slate-800 relative overflow-hidden">
+        </div>
+    </div>
 
-                        <!-- Islamic Pattern Background for form -->
-                        <div
-                            class="absolute inset-0 opacity-[0.03] dark:opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] bg-repeat pointer-events-none">
+    <!-- Main Calculator Area -->
+    <main id="calculator" class="py-24 px-4 bg-[#F0F7F4]/50 dark:bg-slate-950/20">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center mb-16 px-4">
+                <h2 class="text-5xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6 leading-tight">اسمارٹ <span class="text-gold">زکوٰۃ</span> کیلکولیٹر</h2>
+                <p class="text-xl md:text-2xl font-urdu text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed opacity-90">
+                    اپنے اثاثوں کی تفصیلات درج کریں اور فورا معلوم کریں کہ آپ پر کتنی زکات واجب ہے۔ یہ نظام خود بخود نصاب کا حساب لگاتا ہے۔
+                </p>
+                <div class="w-32 h-2 bg-primary/20 mx-auto rounded-full mt-10"></div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="grid lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Right Side: Forms (Flows first in RTL) -->
+                <div class="lg:col-span-8 order-2 lg:order-1 space-y-4">
+                    
+                    <!-- Asset Card: Cash -->
+                    <div class="glass-card p-8 group">
+                        <div class="flex items-center gap-4 mb-6 border-b border-slate-50 dark:border-slate-800/50 pb-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center text-primary">
+                                <i class="ph-fill ph-money-wavy text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black font-urdu">نقدی اور بینک بیلنس</h3>
                         </div>
-
-                        <form id="zakat-form" class="relative z-10 space-y-8 font-sans">
-
-                            <!-- Section: Liquid Assets -->
-                            <div>
-                                <h3
-                                    class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 font-urdu">
-                                    <i class="ph-fill ph-wallet"></i> نقدی اور بینک بیلنس
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">ہاتھ
-                                            میں موجود کیش (Cash)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold currency-symbol">Rs</span>
-                                            <input type="number" id="cash" min="0" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">بینک
-                                            بیلنس (Bank Balance)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold currency-symbol">Rs</span>
-                                            <input type="number" id="bank" min="0" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                    </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-3">
+                                <label for="cash" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">ہاتھ میں موجود کیش (Cash)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm text-slate-400">Rs</span>
+                                    <input type="number" id="cash" placeholder="0" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
                                 </div>
                             </div>
-
-                            <!-- Section: Precious Metals -->
-                            <div>
-                                <h3
-                                    class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 font-urdu">
-                                    <i class="ph-fill ph-scales"></i> سونا اور چاندی
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">سونا
-                                            - گرام میں (Gold in Grams)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">g</span>
-                                            <input type="number" id="gold-grams" min="0" step="0.01" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                        <p class="text-xs text-slate-500 mt-2 font-urdu">موجودہ قیمت کے حساب سے ویلیو
-                                            خود بخود شامل ہو جائے گی۔</p>
-                                    </div>
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">چاندی
-                                            - گرام میں (Silver in Grams)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">g</span>
-                                            <input type="number" id="silver-grams" min="0" step="0.01" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                    </div>
+                            <div class="space-y-3">
+                                <label for="bank" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">بینک بیلنس (Bank Balance)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm text-slate-400">Rs</span>
+                                    <input type="number" id="bank" placeholder="0" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- Section: Business & Investments -->
-                            <div>
-                                <h3
-                                    class="text-xl font-bold text-emerald-800 dark:text-emerald-400 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 font-urdu">
-                                    <i class="ph-fill ph-briefcase"></i> کاروبار اور سرمایہ کاری
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">تجارتی
-                                            مال / اسٹاک (Business Stock)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold currency-symbol">Rs</span>
-                                            <input type="number" id="stock" min="0" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">سرمایہ
-                                            کاری / شِیئرز (Investments)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold currency-symbol">Rs</span>
-                                            <input type="number" id="investments" min="0" placeholder="0"
-                                                class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                    </div>
+
+                    <!-- Asset Card: Gold/Silver -->
+                    <div class="glass-card p-8 group">
+                        <div class="flex items-center gap-4 mb-6 border-b border-slate-100 dark:border-slate-700 pb-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center text-gold">
+                                <i class="ph-fill ph-sketch-logo text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black font-urdu">سونا اور چاندی</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-3">
+                                <label for="gold-grams" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">سونا - گرام میں (Gold in Grams)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm font-black text-slate-400">g</span>
+                                    <input type="number" id="gold-grams" placeholder="0" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
                                 </div>
                             </div>
-
-                            <!-- Section: Liabilities (Debts) -->
-                            <div>
-                                <h3
-                                    class="text-xl font-bold text-red-600 dark:text-red-400 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2 font-urdu">
-                                    <i class="ph-fill ph-hand-coins"></i> واجب الادا قرضے (Liabilities)
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label
-                                            class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 font-urdu">قرض
-                                            یا ادھار دی ہوئی رقم (Loans You Owe)</label>
-                                        <div class="relative">
-                                            <span
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold currency-symbol">Rs</span>
-                                            <input type="number" id="debts" min="0" placeholder="0"
-                                                class="w-full bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-red-500 transition-all text-slate-900 dark:text-white dark:placeholder-slate-500 text-lg font-bold">
-                                        </div>
-                                        <p class="text-xs text-slate-500 mt-2 font-urdu">یہ رقم آپ کے کل اثاثوں سے منہا
-                                            کی جائے گی۔</p>
-                                    </div>
+                            <div class="space-y-3">
+                                <label for="silver-grams" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">چاندی - گرام میں (Silver in Grams)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm font-black text-slate-400">g</span>
+                                    <input type="number" id="silver-grams" placeholder="0" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
                                 </div>
                             </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex gap-4 pt-4">
-                                <button type="button" id="calc-btn"
-                                    class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-emerald-500/30 flex items-center justify-center gap-2 text-lg font-urdu">
-                                    <i class="ph-bold ph-calculator"></i> حساب لگائیں
-                                </button>
-                                <button type="reset" id="reset-btn"
-                                    class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold py-4 px-6 rounded-xl transition-colors">
-                                    <i class="ph-bold ph-arrow-counter-clockwise text-xl"></i>
-                                </button>
-                            </div>
-
-                        </form>
+                        </div>
+                        <p class="text-sm font-urdu text-slate-400 mt-4 pr-2">موجودہ قیمت کے حساب سے ویلیو خود بخود شامل ہو جائے گی۔</p>
                     </div>
 
-                    <!-- Results Area (1 Column wide, sticky) -->
-                    <div
-                        class="lg:col-span-1 border-t-4 border-gold-500 bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-xl sticky top-28 font-sans">
-                        <div class="text-center mb-8 border-b border-slate-100 dark:border-slate-800 pb-6">
-                            <h3 class="text-xl font-bold mb-2 text-slate-800 dark:text-white font-urdu">زکات کا نتیجہ
-                                (Result)</h3>
-                            <div id="nisab-status"
-                                class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-bold mx-auto transition-colors">
-                                <span class="w-2 h-2 rounded-full bg-slate-400 block" id="status-indicator"></span>
-                                <span id="status-text">ویلیوز درج کریں</span>
+                    <!-- Asset Card: Business & Crypto -->
+                    <div class="glass-card p-8 group">
+                        <div class="flex items-center gap-4 mb-6 border-b border-slate-50 pb-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center text-primary">
+                                <i class="ph-fill ph-buildings text-2xl"></i>
                             </div>
-                            <p id="nisab-message" class="text-xs text-slate-500 mt-3 font-urdu hidden">مندرجہ بالا اثاثے
-                                نصاب (سونے یا چاندی کی حد) کو نہیں پہنچیں گے۔</p>
+                            <h3 class="text-xl md:text-2xl font-black font-urdu">کاروبار اور سرمایہ کاری</h3>
                         </div>
-
-                        <div class="space-y-6 mb-8">
-                            <div class="flex justify-between items-center">
-                                <span
-                                    class="text-slate-600 dark:text-slate-400 font-urdu border-b border-dashed border-slate-300 dark:border-slate-600"
-                                    title="Includes Cash, Bank, Gold, Silver, Stocks, Investments">کل اثاثے
-                                    (Assets)</span>
-                                <span class="text-lg font-bold text-slate-900 dark:text-white"><span
-                                        class="currency-symbol text-sm text-slate-500 pr-1">Rs</span><span
-                                        id="res-total-assets">0.00</span></span>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-3">
+                                <label for="stock" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">تجارتی مال / اسٹاک (Business Stock)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm text-slate-400">Rs</span>
+                                    <input type="number" id="stock" placeholder="0" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
+                                </div>
                             </div>
-                            <div class="flex justify-between items-center text-red-600 dark:text-red-400">
-                                <span class="font-urdu">منہا قرضے (Minus Debts)</span>
-                                <span class="text-lg font-bold">- <span
-                                        class="currency-symbol text-sm pr-1 opacity-70">Rs</span><span
-                                        id="res-debts">0.00</span></span>
-                            </div>
-                            <div
-                                class="flex justify-between items-center pt-4 border-t border-slate-100 dark:border-slate-800">
-                                <span class="font-bold text-slate-800 dark:text-white font-urdu">خالص مالیت (Net
-                                    Worth)</span>
-                                <span class="text-xl font-black text-emerald-600 dark:text-emerald-400"><span
-                                        class="currency-symbol text-sm text-emerald-500 pr-1">Rs</span><span
-                                        id="res-net-worth">0.00</span></span>
-                            </div>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-2xl p-6 text-white text-center shadow-lg transform transition-all hover:scale-[1.02]">
-                            <p class="text-emerald-100 font-urdu mb-2">واجب الادا زکات (Payable)</p>
-                            <div class="text-4xl font-black mb-1 flex justify-center items-baseline gap-1">
-                                <span class="text-xl text-emerald-200 currency-symbol">Rs</span>
-                                <span id="res-zakat-amount">0.00</span>
-                            </div>
-                            <p
-                                class="text-xs text-emerald-200 font-sans tracking-widest uppercase mt-3 py-1 px-2 bg-black/10 rounded-full inline-block">
-                                @ 2.5% Rate</p>
-                        </div>
-
-                        <div class="mt-6 flex flex-col gap-3">
-                            <button id="download-pdf"
-                                class="w-full border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500 text-slate-700 dark:text-slate-300 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 group">
-                                <i
-                                    class="ph-bold ph-file-pdf text-xl text-slate-400 group-hover:text-emerald-500 transition-colors"></i>
-                                <span class="font-urdu">رپورٹ (PDF) ڈاؤنلوڈ کریں</span>
-                            </button>
-                            <!-- Save Record Button -->
-                            <button id="save-record"
-                                class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent text-slate-700 dark:text-slate-300 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2">
-                                <i class="ph-bold ph-floppy-disk text-xl text-emerald-500"></i>
-                                <span class="font-urdu">ریکارڈ محفوظ کریں</span>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Sharia Rules Section -->
-        <section id="rules"
-            class="py-20 bg-emerald-50 dark:bg-emerald-950/20 border-y border-emerald-100 dark:border-emerald-900/30">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white mb-6">زکات کے
-                        شرعی مسائل</h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-sans">زکات کس پر فرض ہے؟
-                        کن چیزوں پر زکات دی جائے گی اور کن پر نہیں؟ شرعی رہنمائی حاصل کریں۔</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 font-sans">
-                    <!-- Rule 1 -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 flex flex-col">
-                        <div class="h-48 w-full relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=600&q=80"
-                                alt="Islamic Finance Eligibility"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-                            <div
-                                class="absolute bottom-4 right-4 w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-lg">
-                                <i class="ph-bold ph-user-check text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="p-8 flex-1">
-                            <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-urdu">زکات کن پر فرض
-                                ہے؟
-                            </h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-urdu">ہر وہ مسلمان (عاقل،
-                                بالغ) جو صاحبِ نصاب ہے، یعنی جس کے پاس ساڑھے سات تولہ سونا یا ساڑھے باون تولہ چاندی، یا
-                                اس
-                                کے برابر کیش / مالِ تجارت ہو اور اس پر ایک قمری سال گزر چکا ہو۔</p>
-                        </div>
-                    </div>
-
-                    <!-- Rule 2 -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 flex flex-col">
-                        <div class="h-48 w-full relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80"
-                                alt="Personal Assets and House"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-                            <div
-                                class="absolute bottom-4 right-4 w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-lg">
-                                <i class="ph-bold ph-house-line text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="p-8 flex-1">
-                            <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-urdu">ذاتی استعمال کی
-                                اشیاء</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-urdu">رہائش کا مکان، پہننے
-                                کے
-                                کپڑے، گھر کا فرنیچر، سواری کی گاڑی اور استعمال کی دیگر اشیاء پر زکات فرض نہیں ہے۔</p>
-                        </div>
-                    </div>
-
-                    <!-- Rule 3 -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-slate-100 dark:border-slate-800 group hover:-translate-y-2 flex flex-col">
-                        <div class="h-48 w-full relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80"
-                                alt="Real Estate and Property"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
-                            <div
-                                class="absolute bottom-4 right-4 w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-lg">
-                                <i class="ph-bold ph-buildings text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="p-8 flex-1">
-                            <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white font-urdu">پلاٹ اور کرایہ
-                                داری
-                                کے مسائل</h3>
-                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-urdu">اگر پلاٹ بیچنے کی
-                                نیت سے
-                                خریدا ہے تو اس کی موجودہ مالیت پر زکات واجب ہے۔ کرائے پر دیے گئے مکان یا دکان کی صرف
-                                آمدن
-                                (کرائے) پر زکات ہوتی ہے۔</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quran & Hadith Section -->
-        <section id="quran" class="py-20 bg-white dark:bg-slate-900 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 relative">
-                <!-- Background decoration -->
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-50 dark:bg-emerald-900/10 rounded-full blur-3xl -z-10">
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-8">
-                        <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white">قرآن و
-                            حدیث کی روشنی میں</h2>
-
-                        <!-- Quran Card -->
-                        <div
-                            class="bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
-                            <div
-                                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] bg-repeat">
-                            </div>
-                            <div class="relative z-10">
-                                <i class="ph-fill ph-quotes text-4xl text-emerald-300 opacity-50 mb-4 block"></i>
-                                <p class="text-2xl font-urdu leading-loose text-center mb-6">"وَأَقِيمُوا الصَّلَاةَ
-                                    وَآتُوا الزَّكَاةَ وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ
-                                    اللَّهِ ۗ إِنَّ اللَّهَ بِمَا تَعْمَلُونَ بَصِيرٌ"</p>
-                                <p class="text-emerald-100 font-urdu border-t border-emerald-400/30 pt-4">ترجمہ: ”اور
-                                    نماز قائم کرو اور زکات ادا کرو، اور جو بھلائی تم اپنے لیے آگے بھیجو گے، اسے اللہ کے
-                                    ہاں پا لوگے۔ بے شک اللہ ان کاموں کو دیکھ رہا ہے جو تم کرتے ہو۔“ <span
-                                        class="text-xs opacity-70">(البقرہ: 110)</span></p>
-                            </div>
-                        </div>
-
-                        <!-- Hadith Card -->
-                        <div
-                            class="bg-slate-50 dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 relative overflow-hidden">
-                            <i class="ph-fill ph-quotes text-4xl text-gold-400 opacity-20 absolute top-4 right-6"></i>
-                            <div class="relative z-10">
-                                <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-2 font-urdu">فرمانِ
-                                    مصطفیٰ ﷺ</h4>
-                                <p class="text-slate-700 dark:text-slate-300 font-urdu leading-relaxed mb-4">”اسلام کی
-                                    بنیاد پانچ چیزوں پر رکھی گئی ہے: اس بات کی گواہی دینا کہ اللہ کے سوا کوئی معبود نہیں
-                                    اور محمد ﷺ اس کے بندے اور رسول ہیں، نماز قائم کرنا، زکات دینا، حج کرنا اور رمضان کے
-                                    روزے رکھنا۔“</p>
-                                <p class="text-sm text-slate-500 font-urdu"><span class="font-sans">(صحیح بخاری)</span>
-                                </p>
+                            <div class="space-y-3">
+                                <label for="bitcoin" class="block font-urdu text-lg font-bold text-slate-700 dark:text-slate-300 pr-2">بٹ کوائن اور کرپٹو (Bitcoin / Crypto)</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm text-primary/60 font-black">BTC</span>
+                                    <input type="number" id="bitcoin" step="any" placeholder="0.00" class="w-full bg-slate-50/50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl pl-14 pr-6 py-4 focus:ring-2 focus:ring-primary outline-none font-bold text-xl dark:text-white transition-all">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hidden lg:flex justify-center relative">
-                        <!-- Image Area -->
-                        <div
-                            class="relative w-full max-w-md aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-gold-500">
-                            <!-- High Quality Coins Image for Quran Section using a reliable Pexels/Unsplash alternative format -->
-                            <img src="https://images.pexels.com/photos/210990/pexels-photo-210990.jpeg?auto=compress&cs=tinysrgb&w=800"
-                                alt="Gold Coins Wealth" class="w-full h-full object-cover relative z-0">
-                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/60 to-transparent z-10">
+                    <!-- Liabilities Card (Exact Red Look) -->
+                    <div class="glass-card p-6 border-2 border-red-100/50 group bg-red-50/10">
+                        <div class="flex items-center gap-4 mb-6 border-b border-debt-100/30 pb-4">
+                            <div class="w-10 h-10 bg-debt-50 rounded-xl flex items-center justify-center text-debt">
+                                <i class="ph-fill ph-hand-coins text-2xl"></i>
                             </div>
+                            <h3 class="text-xl md:text-2xl font-black font-urdu text-debt">واجبات (قرضے وغیرہ)</h3>
                         </div>
-
-                        <!-- Floating Badge -->
-                        <div
-                            class="absolute -bottom-6 -left-6 glass-card p-6 rounded-3xl shadow-xl flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 bg-gold-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg shadow-gold-500/30">
-                                <i class="ph-fill ph-heart"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-slate-500 font-sans uppercase font-bold">Purify Wealth</p>
-                                <p class="text-xl font-bold font-sans text-slate-900">2.5%</p>
+                        <div class="space-y-3">
+                            <label for="debts" class="block font-urdu text-lg font-bold text-slate-600 dark:text-slate-400 pr-2">کل واجب الادا رقم</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-sans text-debt/40 text-sm">Rs</span>
+                                <input type="number" id="debts" placeholder="0" class="w-full bg-white dark:bg-slate-900 border-2 border-debt-100/50 dark:border-red-900/20 rounded-2xl pl-12 pr-6 py-4 focus:ring-2 focus:ring-debt outline-none font-bold text-xl text-debt transition-all">
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- 8 Recipients Section -->
-        <section class="py-20 bg-slate-50 dark:bg-slate-800/50">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <span
-                        class="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 font-bold text-sm tracking-wide mb-4 font-sans">MASARIF-E-ZAKAT</span>
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white mb-6">آٹھ
-                        مصارفِ زکات</h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-sans">قرآن مجید (سورۃ
-                        التوبہ: 60) کے مطابق زکات صرف ان آٹھ مستحقین کو دی جا سکتی ہے:</p>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 font-sans">
-                    <!-- Cards -->
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-hand-heart text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">فقیر</h4>
-                        <p class="text-xs text-slate-500 font-urdu">وہ شخص جس کے پاس کچھ ہو مگر نصاب جتنا نہ ہو۔</p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-hands-praying text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">مسکین</h4>
-                        <p class="text-xs text-slate-500 font-urdu">جس کے پاس بالکل کچھ نہ ہو اور وہ دوسروں کا محتاج ہو۔
-                        </p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-users text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">عاملین</h4>
-                        <p class="text-xs text-slate-500 font-urdu">جو اسلامی حکومت کی طرف سے زکات جمع کرنے پر مقرر ہوں۔
-                        </p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-link-break text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">رقاب (غلام)</h4>
-                        <p class="text-xs text-slate-500 font-urdu">غلاموں یا قیدیوں کو ان کی آزادی کے لیے مالی مدد
-                            دینا۔</p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-scales text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">غارمین (مقروض)</h4>
-                        <p class="text-xs text-slate-500 font-urdu">ایسا مقروض جس کا قرض اتار کر اس کے پاس نصاب نہ بچے۔
-                        </p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-mosque text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">فی سبیل اللہ</h4>
-                        <p class="text-xs text-slate-500 font-urdu">اللہ کے راستے میں (جہاد، دین کی نشرواشاعت وغیرہ)۔
-                        </p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-person-simple-walk text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">ابن السبیل</h4>
-                        <p class="text-xs text-slate-500 font-urdu">مسافر جو دورانِ سفر ضرورت مند ہو جائے، چاہے گھر میں
-                            مالدار ہو۔</p>
-                    </div>
-
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-2xl p-6 text-center shadow-sm border border-slate-100 dark:border-slate-800 hover:border-emerald-500 transition-colors group">
-                        <div
-                            class="w-12 h-12 mx-auto rounded-xl bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            <i class="ph-bold ph-heartshake text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-slate-900 dark:text-white font-urdu mb-2">مؤلفة القلوب</h4>
-                        <p class="text-xs text-slate-500 font-urdu">نئے مسلمانوں کی دلجوئی، اور اسلام کی طرف مائل کرنے
-                            کے لیے۔</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Islamic Blog & FAQ Section -->
-        <section id="faq"
-            class="py-20 bg-white dark:bg-slate-900 border-t border-emerald-100 dark:border-emerald-900/30">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <span
-                        class="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 font-bold text-sm tracking-wide mb-4 font-sans">KNOWLEDGE
-                        BASE</span>
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white mb-6">سوالات و
-                        جوابات (FAQ)</h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-sans">زکات کے حوالے سے
-                        عام طور پر پوچھے جانے والے سوالات</p>
-                </div>
-
-                <div class="max-w-3xl mx-auto space-y-4 font-sans">
-                    <!-- FAQ 1 -->
-                    <details
-                        class="group bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 open:border-emerald-500 overflow-hidden transition-colors">
-                        <summary
-                            class="flex justify-between items-center font-bold font-urdu cursor-pointer list-none p-6 text-slate-900 dark:text-white">
-                            <span>کیا زیر استعمال زیور پر زکات ہے؟</span>
-                            <span class="transition group-open:rotate-180">
-                                <i class="ph-bold ph-caret-down text-emerald-600"></i>
-                            </span>
-                        </summary>
-                        <div
-                            class="text-slate-600 dark:text-slate-400 mt-3 p-6 pt-0 font-urdu leading-relaxed border-t border-slate-100 dark:border-slate-700">
-                            احناف کے نزدیک خواہ زیور زیر استعمال ہو یا نہ ہو، اگر وہ سونا یا چاندی نصاب کو پہنچتا ہے تو
-                            اس پر زکات فرض ہے۔
-                        </div>
-                    </details>
-
-                    <!-- FAQ 2 -->
-                    <details
-                        class="group bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 open:border-emerald-500 overflow-hidden transition-colors">
-                        <summary
-                            class="flex justify-between items-center font-bold font-urdu cursor-pointer list-none p-6 text-slate-900 dark:text-white">
-                            <span>اگر قرض دار ادھار واپس نہ کرے تو کیا اس پر بھی میری زکات واجب ہے؟</span>
-                            <span class="transition group-open:rotate-180">
-                                <i class="ph-bold ph-caret-down text-emerald-600"></i>
-                            </span>
-                        </summary>
-                        <div
-                            class="text-slate-600 dark:text-slate-400 mt-3 p-6 pt-0 font-urdu leading-relaxed border-t border-slate-100 dark:border-slate-700">
-                            جب تک وہ رقم وصول نہ ہو جائے، زکات کی ادائیگی فی الحال ضروری نہیں۔ جب مل جائے تو پچھلے سالوں
-                            کی بھی ادا کرنی ہوگی (اگر وہ بیڈ ڈیٹ نہ ہو)۔ بہتر ہے کہ ہر سال احتیاطاً ادا کر دی جائے۔
-                        </div>
-                    </details>
-
-                    <!-- FAQ 3 -->
-                    <details
-                        class="group bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 open:border-emerald-500 overflow-hidden transition-colors">
-                        <summary
-                            class="flex justify-between items-center font-bold font-urdu cursor-pointer list-none p-6 text-slate-900 dark:text-white">
-                            <span>کیا بھائی بہن کو زکات دی جا سکتی ہے؟</span>
-                            <span class="transition group-open:rotate-180">
-                                <i class="ph-bold ph-caret-down text-emerald-600"></i>
-                            </span>
-                        </summary>
-                        <div
-                            class="text-slate-600 dark:text-slate-400 mt-3 p-6 pt-0 font-urdu leading-relaxed border-t border-slate-100 dark:border-slate-700">
-                            جی ہاں، بلکہ انہیں دینا دوہرا اجر (صدقہ اور صلہ رحمی) ہے۔ شرط یہ ہے کہ وہ مستحق ہوں (صاحبِ
-                            نصاب نہ ہوں) اور زکات کی رقم انہیں بطور حق ملکیت دی جائے۔
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- Subscription / Reminder System -->
-        <section class="py-20 bg-emerald-600 text-white relative flex items-center justify-center overflow-hidden">
-            <div
-                class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] bg-repeat">
-            </div>
-            <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
-                <i class="ph-fill ph-bell-ringing text-5xl text-gold-400 mb-6 drop-shadow-lg"></i>
-                <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6">سالانہ زکات ریمائنڈر</h2>
-                <p class="text-lg text-emerald-100 max-w-2xl mx-auto font-sans mb-10">اپنی زکات کی ادائیگی کی تاریخ سیٹ
-                    کریں تاکہ ہجری سال مکمل ہونے پر ہم آپ کو ای میل کے ذریعے آگاہ کر سکیں۔</p>
-                <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto font-sans"
-                    onsubmit="event.preventDefault(); alert('Reminder functionality will be active once connected to backend API.');">
-                    <input type="email" placeholder="آپ کا ای میل ایڈریس" required
-                        class="flex-1 bg-white/10 backdrop-blur-md border border-white/30 rounded-full px-6 py-4 text-white placeholder-emerald-200 outline-none focus:border-gold-400 transition-colors">
-                    <button type="submit"
-                        class="bg-gold-500 hover:bg-gold-400 text-emerald-950 font-bold px-8 py-4 rounded-full transition-colors flex items-center justify-center gap-2">
-                        <i class="ph-bold ph-paper-plane-right"></i> شامل ہوں
+                    <button id="reset-btn" class="w-full py-6 text-slate-400 hover:text-red-500 font-urdu text-xl flex items-center justify-center gap-3 transition-colors">
+                        <i class="ph ph-arrows-counter-clockwise text-2xl"></i>
+                        کیلکولیٹر مکمل ری سیٹ کریں
                     </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-slate-50 dark:bg-slate-800/50">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold text-slate-900 dark:text-white mb-4">ہم سے
-                        رابطہ کریں</h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-sans">اپنا سوال لکھیں
-                        اور ایک کلک سے واٹس ایپ یا ای میل پر ہمیں بھیجیں۔</p>
                 </div>
 
-                <div
-                    class="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100 dark:border-slate-800">
-                    <div class="mb-8">
-                        <label
-                            class="block text-slate-700 dark:text-slate-300 font-bold mb-4 font-urdu text-xl text-center">اپنا
-                            سوال یا پیغام یہاں ٹائپ کریں:</label>
-                        <textarea id="contact-message" rows="5"
-                            class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 text-slate-900 dark:text-white outline-none focus:border-emerald-500 transition-colors font-sans text-lg focus:ring-4 ring-emerald-500/10 placeholder-slate-400"
-                            placeholder="مثال: میرا سوال سونے اور چاندی کی زکات کے حوالے سے ہے کہ..."></textarea>
-                    </div>
+                <!-- Left Side: Results Sidebar (Sticky) -->
+                <div class="lg:col-span-4 order-1 lg:order-2">
+                    <div class="lg:sticky lg:top-28 space-y-4">
+                        
+                        <!-- Result Card -->
+                        <div class="glass-card p-8 bg-white/95 backdrop-blur-md border-t-4 border-gold shadow-2xl">
+                            <div class="text-center mb-6">
+                                <h3 class="text-2xl font-black font-urdu">زکوٰۃ کا نتیجہ (Result)</h3>
+                                <div id="nisab-status" class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-400 font-bold transition-all border border-secondary mt-3">
+                                    <span id="status-indicator" class="w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span id="status-text" class="text-xs md:text-sm font-urdu">ویلیوز درج کریں</span>
+                                </div>
+                            </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="sendWhatsApp()"
-                            class="flex-1 bg-[#25D366] hover:bg-[#20b958] text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg hover:-translate-y-1 text-xl font-urdu">
-                            <i class="ph-bold ph-whatsapp-logo text-3xl"></i>
-                            واٹس ایپ پر بھیجیں
-                        </button>
-                        <button onclick="sendEmail()"
-                            class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-5 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg hover:-translate-y-1 text-xl font-urdu">
-                            <i class="ph-bold ph-envelope-simple text-3xl"></i>
-                            ای میل پر بھیجیں
-                        </button>
+                            <div class="space-y-5 mb-8">
+                                <div class="flex justify-between items-center pb-3 border-b border-dotted border-slate-100 dark:border-slate-800">
+                                    <p class="font-urdu text-base md:text-lg font-bold text-slate-600 dark:text-slate-400">کل اثاثے (Total Assets)</p>
+                                    <p class="text-sm md:text-base font-sans text-slate-500 font-bold">Rs <span id="res-total-assets">0.00</span></p>
+                                </div>
+                                <div class="flex justify-between items-center pb-3 border-b border-dotted border-slate-100 dark:border-slate-800">
+                                    <p class="font-urdu text-base md:text-lg font-bold text-red-500/80">منہا قرضے (Minus Debts)</p>
+                                    <p class="text-sm md:text-base font-sans text-red-400 font-bold">Rs <span id="res-debts">0.00</span> -</p>
+                                </div>
+                                <div class="flex justify-between items-center pb-4">
+                                    <p class="font-urdu text-lg md:text-xl font-black text-slate-900 dark:text-white">خالص مالیت (Net Worth)</p>
+                                    <p class="text-lg md:text-xl font-sans text-primary font-black">Rs <span id="res-net-worth">0.00</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Final Zakat Box -->
+                            <div class="bg-primary rounded-[2rem] p-8 text-white text-center mb-6 shadow-xl relative overflow-hidden group">
+                                <p class="font-urdu text-sm md:text-base font-bold opacity-80 mb-3">واجب الادا زکوٰۃ (Payable)</p>
+                                <div class="flex items-center justify-center gap-3 mb-4">
+                                    <span class="text-5xl md:text-6xl font-black font-sans tracking-tight" id="res-zakat-amount">0.00</span>
+                                    <span class="text-sm font-bold opacity-50">Rs</span>
+                                </div>
+                                <div class="pt-4 border-t border-white/10 flex justify-center gap-4">
+                                    <p class="font-urdu text-xs opacity-70">RATE 2.5% @</p>
+                                </div>
+                                <div id="nisab-message" class="hidden mt-4 pt-4 border-t border-white/10">
+                                    <p class="font-urdu text-xs md:text-sm opacity-90 leading-relaxed italic">آپ کی مالیت نصاب سے کم ہے۔</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button id="download-pdf" class="flex items-center justify-center gap-3 w-full py-4 bg-slate-900 text-white font-urdu text-lg font-bold rounded-2xl hover:bg-black transition-all shadow-lg">
+                                    <i class="ph ph-file-pdf text-2xl text-gold"></i>
+                                    ڈاؤن لوڈ رپورٹ (PDF)
+                                </button>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button id="save-record" class="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-white font-urdu text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 transition-colors">
+                                        <i class="ph ph-floppy-disk text-primary text-base"></i>
+                                        سیو کریں
+                                    </button>
+                                    <button id="view-records-btn" class="flex items-center justify-center gap-2 py-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-white font-urdu text-sm font-bold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 transition-colors">
+                                        <i class="ph ph-clock-counter-clockwise text-base"></i>
+                                        ہسٹری
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Banner -->
+                        <div class="glass-card p-6 bg-emerald-50/10 dark:bg-emerald-900/10 border-emerald-100/20 shadow-lg">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+                                    <i class="ph-fill ph-info text-base"></i>
+                                </div>
+                                <h4 class="font-urdu font-bold text-primary">ضروری شرعی ہدایت:</h4>
+                            </div>
+                            <p class="font-urdu text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                زکوٰۃ صرف اس مال پر واجب ہوتی ہے جس پر ایک مکمل قمری سال گزر چکا ہو۔ یہ کیلکولیٹر نصاب کا خودکار حساب لگاتا ہے۔
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
+    
+    <section id="sharia-rules" class="py-24 px-4 bg-emerald-50/10 dark:bg-slate-900/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 px-4">
+                <h2 class="text-5xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6 leading-tight">زکات کے شرعی مسائل</h2>
+                <p class="text-lg md:text-xl font-urdu text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-loose opacity-80">
+                    زکات کس پر فرض ہے؟ کن چیزوں پر زکات دی جائے گی اور کن پر نہیں؟ شرعی رہنمائی حاصل کریں۔
+                </p>
+                <div class="w-24 h-1.5 bg-primary/20 mx-auto rounded-full mt-8"></div>
+            </div>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="font-sans">© 2026 ZakatEase. All rights reserved.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: Who is Zakat obligatory for? -->
+                <div class="glass-card overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="sharia_quran_light.png" alt="Zakat Rules" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 right-4 w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="ph-fill ph-users-three text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <h3 class="text-2xl font-urdu font-black text-slate-900 border-b-2 border-primary/10 pb-4 mb-6">زکوٰۃ کس پر واجب ہے؟</h3>
+                        <p class="font-urdu text-lg text-slate-600 leading-[2] mb-6">
+                            وہ مسلمان جس کے پاس ساڑھے سات تولہ سونا یا ساڑھے باون تولہ چاندی یا اس کی قیمت کا مال موجود ہو اور اسے حاصل ہوئے ایک سال بیت چکا ہو۔      
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Personal Items -->
+                <div class="glass-card overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="sharia_modern_house.png" alt="Personal Property" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 right-4 w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="ph-fill ph-house text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <h3 class="text-2xl font-black font-urdu text-slate-900 dark:text-white border-b-2 border-primary/10 pb-4 mb-6">ذاتی استعمال کی اشیاء</h3>
+                        <p class="font-urdu text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed mb-6">
+                            رہائش کا مکان، پہنے کے کپڑے، گھر کا فرنیچر، سواری کی گاڑی اور استعمال کی دیگر اشیاء پر زکات فرض نہیں ہے۔
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Plots & Rent -->
+                <div class="glass-card overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                    <div class="h-64 relative overflow-hidden">
+                        <img src="sharia_house_keys.png" alt="Plots and Rent" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 right-4 w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="ph-fill ph-buildings text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-8 text-right">
+                        <h3 class="text-2xl font-black font-urdu text-slate-900 dark:text-white border-b-2 border-primary/10 pb-4 mb-6">پلاٹ اور کرایہ داری کے مسائل</h3>
+                        <p class="font-urdu text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed mb-6">
+                            اگر پلاٹ بیچنے کی نیت سے خریدا ہے تو اس کی موجودہ مالیت پر زکات واجب ہے۔ کرائے پر دیئے گئے مکان یا دکان کی صرف آمدن (کرائے) پر زکات ہوتی ہے۔
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quran & Hadith Section (V4 Final) -->
+    <section id="quran-hadith" class="py-24 px-4 bg-white dark:bg-slate-900 border-t border-slate-50 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row-reverse gap-16 items-center">
+                
+                <!-- Image Column (Left in UI) -->
+                <div class="w-full lg:w-1/2">
+                    <div class="relative inline-block w-full text-center">
+                        <div class="absolute inset-0 border-[12px] border-orange-400 rounded-[4rem] -m-2 opacity-100"></div>
+                        <img src="zakat_luxury_gold.png" alt="Zakat Luxury Gold" class="relative z-10 w-full rounded-[3.5rem] shadow-2xl object-cover h-[500px] border-4 border-white flip-x mx-auto">
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 text-right">
+                    <div class="text-right mb-12">
+                        <h2 class="text-4xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6 leading-tight">قرآن و حدیث کی روشنی میں</h2>
+                        <div class="w-24 h-1.5 bg-primary/30 mr-0 ml-auto rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-16">
+                        <!-- Allah's Command -->
+                        <div class="bg-emerald-50/30 dark:bg-emerald-900/10 p-10 md:p-14 rounded-[3rem] border-r-8 border-primary shadow-xl hover:shadow-2xl transition-all duration-500">
+                            <div class="flex items-center gap-5 mb-8 justify-start">
+                                <div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center text-white shadow-lg">
+                                    <i class="ph-fill ph-mosque text-3xl"></i>
+                                </div>
+                                <h3 class="text-3xl md:text-4xl font-black font-urdu text-primary">اللہ کا فرمان</h3>
+                            </div>
+                            <p class="font-urdu text-2xl md:text-3xl text-slate-900 dark:text-white leading-[2.5] mb-6 drop-shadow-sm">
+                                "اور نماز قائم کرو اور زکوٰۃ ادا کرو اور رکوع کرنے والوں کے ساتھ رکوع کرو۔"
+                            </p>
+                            <p class="font-urdu text-base opacity-70 text-left font-bold border-t border-primary/10 pt-4">(سورۃ البقرہ: 43)</p>
+                        </div>
+
+                        <!-- Hadith Quote -->
+                        <div class="bg-amber-50/30 dark:bg-amber-900/10 p-10 md:p-14 rounded-[3rem] border-r-8 border-gold shadow-xl hover:shadow-2xl transition-all duration-500">
+                            <div class="flex items-center gap-5 mb-8 justify-start">
+                                <div class="w-14 h-14 bg-gold rounded-2xl flex items-center justify-center text-slate-900 shadow-lg">
+                                    <i class="ph-fill ph-book-open text-3xl"></i>
+                                </div>
+                                <h3 class="text-3xl md:text-4xl font-black font-urdu text-gold-700">فرمانِ مصطفیٰ ﷺ</h3>
+                            </div>
+                            <p class="font-urdu text-xl md:text-2xl text-slate-800 dark:text-slate-200 mb-8 leading-[2.2]">
+                                حضرت ابن عباس رضی اللہ عنہ سے مروی ہے کہ نبی کریم ﷺ نے جب معاذ رضی اللہ عنہ کو یمن بھیجا تو فرمایا:
+                            </p>
+                            <div class="bg-white/80 dark:bg-emerald-950/40 p-10 rounded-[2.5rem] border-2 border-gold/20 shadow-inner">
+                                <p class="font-urdu text-2xl md:text-3xl text-slate-900 dark:text-white font-bold mb-6 leading-[2.5]">
+                                    "انہیں بتائیں کہ اللہ نے ان کے مالوں پر زکوٰۃ فرض کی ہے، جو ان کے امیروں سے لی جائے گی اور ان کے غریبوں میں تقسیم کی جائے گی۔"
+                                </p>
+                                <p class="font-urdu text-base opacity-70 text-left font-bold border-t border-gold/10 pt-4">(صحیح بخاری: 1496)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipients Section -->
+    <section id="recipients" class="py-24 px-4 bg-white dark:bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-black font-urdu mb-6 text-slate-900 dark:text-white">آٹھ مصارفِ زکوٰۃ</h2>
+                <p class="font-urdu text-slate-600 dark:text-slate-400 text-xl md:text-2xl opacity-90 leading-loose">قرآن کے مطابق ان آٹھ قسم کے لوگوں کو زکات دی جا سکتی ہے</p>
+                <div class="w-24 h-1.5 bg-primary/20 mx-auto rounded-full mt-8"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 1 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-primary-50 rounded-3xl flex items-center justify-center text-primary mb-6 group-hover:bg-white/20 group-hover:text-white shadow-inner">
+                        <i class="ph ph-hand-heart text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">فُقراء</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">جو اپنی بنیادی ضروریات پوری نہ کر سکیں</p>
+                </div>
+                <!-- 2 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-gold hover:text-slate-900 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-gold/10 rounded-3xl flex items-center justify-center text-gold mb-6 group-hover:bg-white/20 group-hover:text-slate-900 shadow-inner">
+                        <i class="ph ph-users text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">مساکین</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">جن کے پاس کچھ نہ ہو، نہایت مجبور لوگ</p>
+                </div>
+                <!-- 3 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-primary-50 rounded-3xl flex items-center justify-center text-primary mb-6 group-hover:bg-white/20 group-hover:text-white shadow-inner">
+                        <i class="ph ph-briefcase text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">عاملین</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">زکوٰۃ اکٹھا کرنے والے ملازمین</p>
+                </div>
+                <!-- 4 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-gold hover:text-slate-900 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-gold/10 rounded-3xl flex items-center justify-center text-gold mb-6 group-hover:bg-white/20 group-hover:text-slate-900 shadow-inner">
+                        <i class="ph ph-hands-clapping text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">مولفۃ القلوب</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">جن کی دلجوئی کر کے اسلام سے قربت پیدا کرنا مقصود ہو</p>
+                </div>
+                <!-- 5 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-primary-50 rounded-3xl flex items-center justify-center text-primary mb-6 group-hover:bg-white/20 group-hover:text-white shadow-inner">
+                        <i class="ph ph-key text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">رِقاب</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">غلاموں یا قیدیوں کی آزادی کے لیے</p>
+                </div>
+                <!-- 6 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-gold hover:text-slate-900 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-gold/10 rounded-3xl flex items-center justify-center text-gold mb-6 group-hover:bg-white/20 group-hover:text-slate-900 shadow-inner">
+                        <i class="ph ph-wallet text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">غارِمین</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">قرض میں ڈوبے ہوئے مستحق لوگ</p>
+                </div>
+                <!-- 7 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-primary-50 rounded-3xl flex items-center justify-center text-primary mb-6 group-hover:bg-white/20 group-hover:text-white shadow-inner">
+                        <i class="ph ph-mosque text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">فی سبیل اللہ</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">اللہ کی راہ میں کوشش کرنے والے مجاہدین یا طلباء</p>
+                </div>
+                <!-- 8 -->
+                <div class="glass-card p-10 flex flex-col items-center text-center group hover:bg-gold hover:text-slate-900 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-24 h-24 bg-gold/10 rounded-3xl flex items-center justify-center text-gold mb-6 group-hover:bg-white/20 group-hover:text-slate-900 shadow-inner">
+                        <i class="ph ph-map-pin-line text-5xl"></i>
+                    </div>
+                    <span class="font-urdu font-black text-3xl mb-4">ابن السبیل</span>
+                    <p class="text-lg font-urdu opacity-80 leading-relaxed">وہ مسافر جو دورانِ سفر ضرورت مند ہو</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (Clean Screenshot Match) -->
+    <section id="faq" class="py-24 px-4 bg-[#F8FAF9] dark:bg-slate-900/40">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-6 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-sm md:text-lg font-bold uppercase tracking-widest rounded-full mb-6">مفید معلومات (Knowledge Base)</span>
+                <h2 class="text-5xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6">سوالات و جوابات (FAQ)</h2>
+                <p class="font-urdu text-slate-500 dark:text-slate-400 text-xl md:text-2xl opacity-80 leading-loose">
+                    زکوٰۃ کے حوالے سے عام طور پر پوچھے جانے والے سوالات کے شرعی جوابات
+                </p>
+            </div>
+            
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <!-- FAQ 1 -->
+                <div class="glass-card shadow-sm hover:shadow-md transition-all border-none">
+                    <button class="w-full text-right flex justify-between items-center p-6 md:p-8 font-urdu text-xl font-bold group" onclick="toggleFaq(this)">
+                        <span class="text-slate-800 dark:text-slate-200">کیا زیر استعمال زیور پر زکات ہے؟</span>
+                        <i class="ph ph-caret-down text-emerald-500 transition-transform group-hover:scale-110"></i>
+                    </button>
+                    <div class="hidden px-8 pb-8 font-urdu text-slate-500 dark:text-slate-400 leading-loose text-base border-t border-slate-50 dark:border-slate-800/30 pt-6">
+                        جی ہاں، اگر آپ کے پاس موجود سونے کے تمام زیورات (استعمال والے اور غیر استعمال والے) ملا کر نصاب (ساڑھے سات تولہ) کو پہنچ جائیں تو ان پر زکوٰۃ فرض ہے۔
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-card shadow-sm hover:shadow-md transition-all border-none">
+                    <button class="w-full text-right flex justify-between items-center p-6 md:p-8 font-urdu text-xl font-bold group" onclick="toggleFaq(this)">
+                        <span class="text-slate-800 dark:text-slate-200">اگر قرض دار ادھار واپس نہ کرے تو کیا اس پر بھی میری زکات واجب ہے؟</span>
+                        <i class="ph ph-caret-down text-emerald-500 transition-transform group-hover:scale-110"></i>
+                    </button>
+                    <div class="hidden px-8 pb-8 font-urdu text-slate-500 dark:text-slate-400 leading-loose text-base border-t border-slate-50 dark:border-slate-800/30 pt-6">
+                        اگر قرض کی واپسی کی امید ہو تو اس رقم کو اپنے زکوٰۃ والے اثاثوں میں شامل کرنا ضروری ہے، تاہم اگر قرض ڈوب چکا ہو تو اس پر زکوٰۃ واجب نہیں۔
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-card shadow-sm hover:shadow-md transition-all border-none">
+                    <button class="w-full text-right flex justify-between items-center p-6 md:p-8 font-urdu text-xl font-bold group" onclick="toggleFaq(this)">
+                        <span class="text-slate-800 dark:text-slate-200">کیا بھائی بہن کو زکات دی جا سکتی ہے؟</span>
+                        <i class="ph ph-caret-down text-emerald-500 transition-transform group-hover:scale-110"></i>
+                    </button>
+                    <div class="hidden px-8 pb-8 font-urdu text-slate-500 dark:text-slate-400 leading-loose text-base border-t border-slate-50 dark:border-slate-800/30 pt-6">
+                        جی ہاں، اپنے غریب بہن بھائیوں اور دیگر خونی رشتوں (سوائے ماں باپ، اولاد اور میاں بیوی کے) کو زکوٰۃ دینا نہ صرف جائز ہے بلکہ اس میں دوہرا اجر ہے (صدقہ اور صلہ رحمی)۔
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Screenshot Match) -->
+    <section id="contact" class="py-24 px-4 bg-white dark:bg-slate-900 border-t border-slate-50 dark:border-slate-800">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 px-4">
+                <h2 class="text-5xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6 leading-tight">ہم سے رابطہ کریں</h2>
+                <p class="text-lg md:text-xl font-urdu text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-loose opacity-80">
+                    اپنا سوال لکھیں اور ایک کلک سے واٹس ایپ یا ای میل پر ہمیں بھیجیں۔
+                </p>
+                <div class="w-24 h-1.5 bg-primary/20 mx-auto rounded-full mt-8"></div>
+            </div>
+
+            <div class="glass-card p-8 md:p-14 max-w-3xl mx-auto bg-white/50 backdrop-blur-xl border-slate-100/50 shadow-2xl rounded-[3rem]">
+                <div class="mb-10 text-right">
+                    <label class="block font-urdu text-2xl font-black text-slate-800 dark:text-slate-200 mb-6">اپنا سوال یا پیغام یہاں ٹائپ کریں:</label>
+                    <textarea id="contact-msg" rows="6" dir="rtl" class="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 font-urdu text-lg focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-300" placeholder="مثال: میرا سوال سونے اور چاندی کی زکات کے حوالے سے ہے کہ..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- WhatsApp Button -->
+                    <button onclick="sendViaWhatsApp()" class="flex flex-row-reverse items-center justify-center gap-4 py-5 bg-[#25D366] hover:bg-[#128C7E] text-white font-urdu text-2xl font-black rounded-2xl shadow-xl transition-all hover:-translate-y-1">
+                        <i class="ph-fill ph-whatsapp-logo text-3xl"></i>
+                        واٹس ایپ پر بھیجیں
+                    </button>
+                    <!-- Email Button -->
+                    <button onclick="sendViaEmail()" class="flex flex-row-reverse items-center justify-center gap-4 py-5 bg-[#EF4444] hover:bg-[#DC2626] text-white font-urdu text-2xl font-black rounded-2xl shadow-xl transition-all hover:-translate-y-1">
+                        <i class="ph-fill ph-envelope text-3xl"></i>
+                        ای میل پر بھیجیں
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function sendViaWhatsApp() {
+            const msg = document.getElementById('contact-msg').value;
+            if(!msg) { alert('براہ کرم اپنا پیغام ٹائپ کریں'); return; }
+            const url = `https://wa.me/923486867364?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+        function sendViaEmail() {
+            const msg = document.getElementById('contact-msg').value;
+            if(!msg) { alert('براہ کرم اپنا پیغام ٹائپ کریں'); return; }
+            const url = `mailto:azaad9592@gmail.com?subject=ZakatEase Inquiry&body=${encodeURIComponent(msg)}`;
+            window.location.href = url;
+        }
+    </script>
+    <footer class="bg-primary-900 text-white py-24 px-4 overflow-hidden relative">
+        <!-- Subtle Background Pattern -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-gold rounded-full filter blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary rounded-full filter blur-[120px] translate-x-1/2 translate-y-1/2"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <!-- Centered Branding (EXACT MATCH TO HEADER) -->
+            <div class="flex items-center justify-center gap-3 mb-12 animate-fade-up">
+                <div class="flex flex-col -space-y-1 text-left">
+                    <span class="text-3xl font-black tracking-tight">
+                        <span class="text-white">Zakat</span><span class="text-gold">Ease</span>
+                    </span>
+                </div>
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5">
+                    <img src="zakatease_crescent_logo_v3.png" alt="Icon" class="w-full h-full object-contain">
+                </div>
+            </div>
+
+            <!-- Balanced Contact Info (Gmail Only) -->
+            <div class="flex flex-col items-center gap-5 mb-16">
+                <a href="mailto:azaad9592@gmail.com" class="group flex items-center gap-3 transition-all hover:opacity-80">
+                    <i class="ph-bold ph-envelope-simple text-xl text-gold"></i>
+                    <span class="text-base font-sans font-medium text-white/80">azaad9592@gmail.com</span>
+                </a>
+            </div>
+
+            <!-- Copyright Area -->
+            <div class="pt-12 border-t border-white/5 text-center">
+                <p class="font-urdu text-xl md:text-2xl text-white/30 tracking-widest leading-loose">
+                    تمام حقوق بحق زکوٰۃ ایز محفوظ ہیں © 2026
+                </p>
+                <div class="flex justify-center gap-2 mt-8">
+                    <div class="w-8 h-1 bg-gold rounded-full opacity-20"></div>
+                    <div class="w-16 h-1 bg-gold rounded-full opacity-40"></div>
+                    <div class="w-8 h-1 bg-gold rounded-full opacity-20"></div>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Custom JS -->
-    <script src="app.js?v=1"></script>
-</body>
+    <!-- History Modal -->
+    <div id="records-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-xl rounded-[2rem] shadow-2xl relative overflow-hidden flex flex-col max-h-[80vh]">
+            <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                <h3 class="text-2xl font-black font-urdu">محفوظ ریکارڈز</h3>
+                <button class="modal-close w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+            <div id="records-list" class="flex-1 overflow-y-auto p-6 space-y-4 font-urdu">
+                <!-- History injected here -->
+            </div>
+            <div class="p-6 bg-slate-50 flex gap-4">
+                <button id="clear-all-records" class="flex-1 py-3 bg-red-50 text-red-600 font-bold font-urdu rounded-xl hover:bg-red-100">ہسٹری کلیئر کریں</button>
+                <button class="modal-close flex-1 py-3 bg-slate-200 text-slate-800 font-bold font-urdu rounded-xl">بند کریں</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- PDF Template (Hidden) -->
+    <div style="position: absolute; left: -9999px; top: 0;">
+        <div id="pdf-export-template" style="width: 800px; padding: 70px; background: white; color: #1e293b; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; position: relative; border: 1px solid #e2e8f0; direction: ltr; text-align: left;">
+            <!-- Watermark / Decorative Border -->
+            <div style="position: absolute; top: 20px; right: 20px; bottom: 20px; left: 20px; border: 1px solid #f1f5f9; pointer-events: none; z-index: 0;"></div>
+            
+            <!-- PDF Header (Forced LTR) -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #078D5B; padding-bottom: 30px; margin-bottom: 50px; position: relative; z-index: 10;">
+                <div style="text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <span style="font-size: 38px; font-weight: 900; color: #078D5B; margin: 0; padding: 0; line-height: 1;">Zakat<span style="color: #fbbf24;">Ease</span></span>
+                    </div>
+                    <p style="margin: 0; font-size: 11px; font-weight: 800; color: #94a3b8; letter-spacing: 3px; text-transform: uppercase;">Official Financial Report</p>
+                </div>
+                <div style="text-align: right;">
+                    <p style="margin: 0 0 5px 0; font-size: 12px; font-weight: 800; color: #64748b; letter-spacing: 1px;">ISSUE DATE</p>
+                    <p id="pdf-date" style="margin: 0; font-size: 20px; font-weight: 900; color: #078D5B; line-height: 1;"></p>
+                    <p id="pdf-currency" style="margin: 8px 0 0 0; font-size: 11px; font-weight: 700; color: #94a3b8;"></p>
+                </div>
+            </div>
+
+            <!-- Asset Overview Cards -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; position: relative; z-index: 10;">
+                <div style="background: #f8fafc; padding: 30px; border-radius: 20px; border-left: 6px solid #078D5B; text-align: left;">
+                    <p style="margin: 0; font-size: 11px; font-weight: 800; color: #64748b; letter-spacing: 1.5px; text-transform: uppercase;">Total Assets Evaluation</p>
+                    <p style="margin: 12px 0 0 0; font-size: 32px; font-weight: 900; color: #0f172a;"><span id="pdf-total-assets"></span></p>
+                </div>
+                <div style="background: #fff1f2; padding: 30px; border-radius: 20px; border-left: 6px solid #f43f5e; text-align: left;">
+                    <p style="margin: 0; font-size: 11px; font-weight: 800; color: #e11d48; letter-spacing: 1.5px; text-transform: uppercase;">Liabilities & Deductions</p>
+                    <p style="margin: 12px 0 0 0; font-size: 32px; font-weight: 900; color: #9f1239;"><span id="pdf-debts"></span></p>
+                </div>
+            </div>
+
+            <!-- Main Zakat Amount Banner -->
+            <div style="background: linear-gradient(135deg, #064e3b 0%, #078D5B 100%); padding: 60px; border-radius: 35px; color: white; text-align: center; margin-bottom: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2); position: relative; z-index: 10;">
+                <p style="margin: 0; font-size: 16px; font-weight: 700; opacity: 0.8; letter-spacing: 2px; text-transform: uppercase;">Final Calculated Zakat Amount</p>
+                <div style="margin: 20px 0 0 0; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <span id="pdf-symbol" style="font-size: 28px; font-weight: 400; opacity: 0.6;"></span>
+                    <span id="pdf-zakat-amount" style="font-size: 72px; font-weight: 900; letter-spacing: -2px;"></span>
+                </div>
+            </div>
+
+            <!-- Detailed Breakdown -->
+            <div style="margin-bottom: 60px; position: relative; z-index: 10; text-align: left;">
+                <h4 style="font-size: 14px; font-weight: 900; color: #1e293b; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; letter-spacing: 1px;">DETAILED CALCULATION LOG</h4>
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <tbody id="pdf-table-body" style="font-size: 15px; color: #475569;"></tbody>
+                </table>
+            </div>
+
+            <!-- PDF Footer -->
+            <div style="border-top: 1px solid #f1f5f9; padding-top: 40px; text-align: center; position: relative; z-index: 10;">
+                <p style="margin: 0; font-size: 13px; font-weight: 800; color: #1e293b; opacity: 0.8;">ZakatEase Premium Financial Certification</p>
+                <p style="margin: 10px 0 0 0; font-size: 10px; font-weight: 500; color: #94a3b8; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">This certificate provides a calculated estimate of Zakat based on Islamic Sharia principles (2.5% rate). Please verify with a qualified religious authority for complex assets.</p>
+                <div style="margin-top: 30px; font-size: 9px; color: #cbd5e1; font-weight: 700; letter-spacing: 2px;">SECURE DIGITAL REPORT • © 2026 ZAKATEASE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('ph-caret-up');
+            icon.classList.toggle('ph-caret-down');
+        }
+    </script>
+</body>
 </html>
