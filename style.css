@@ -131,23 +131,23 @@ h2.font-urdu { line-height: 1.3 !important; }
 @media (max-width: 768px) {
   .font-urdu { 
     font-size: 1.15rem; 
-    line-height: 2.0 !important; /* Professional Nasta'liq spacing */
+    line-height: 2.2 !important; /* Professional Nasta'liq spacing */
   }
   
   h1.font-urdu {
-    line-height: 1.8 !important; /* Tightened hero title */
-    margin-bottom: 1.5rem !important;
-    padding-top: 0 !important;
+    line-height: 2.8 !important; /* Definitively separated hero title */
+    margin-bottom: 2rem !important;
+    padding-top: 1.5rem !important;
   }
 
   h2.font-urdu {
-    line-height: 1.8 !important; /* Balanced gap for section titles */
-    margin-bottom: 1rem !important;
-    padding-top: 0 !important;
+    line-height: 2.2 !important; /* Balanced gap for section titles */
+    margin-bottom: 1.5rem !important;
+    padding-top: 0.5rem !important;
   }
 
   p.font-urdu {
-    line-height: 2.0 !important; /* Clean look for paragraphs */
+    line-height: 2.2 !important; /* Clean look for paragraphs */
     margin-bottom: 1.5rem;
   }
 
