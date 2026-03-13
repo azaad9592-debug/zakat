@@ -72,6 +72,13 @@ html {
   box-shadow: var(--card-shadow);
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dark .glass-card {
+  background: #0f172a; /* Deep slate for dark mode */
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
 .glass-card:hover {
