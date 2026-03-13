@@ -131,46 +131,67 @@ h2.font-urdu { line-height: 1.3 !important; }
 @media (max-width: 768px) {
   .font-urdu { 
     font-size: 1.25rem; 
-    line-height: 2.5 !important;
+    line-height: 4.2 !important; /* Global extreme gap for Nastaleeq dots */
+    display: block;
   }
   
   h1.font-urdu {
-    line-height: 3 !important; /* Increased for hero heading */
-    margin-bottom: 2.5rem;
+    line-height: 6.5 !important; /* Massive gap for hero title to fix 'Adai-gi' overlap */
+    margin-bottom: 4rem !important;
+    padding-top: 4rem !important;
   }
 
   h2.font-urdu {
-    line-height: 2.8 !important; /* Optimized for smart calculator title */
+    line-height: 5.5 !important; /* Gap for calculator/section titles */
+    margin-bottom: 3.5rem !important;
+    padding-top: 3.5rem !important;
+  }
+
+  p.font-urdu {
+    line-height: 4.2 !important; /* Extreme gap for all paragraphs */
     margin-bottom: 2rem;
   }
 
-  /* Fix market rates to stay in a straight scrollable line or 3 cols */
+  /* Fix market rates to stay in a PERFECT straight line (3 items) */
   .market-rates-grid {
     display: flex !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    gap: 1.5rem !important;
-    padding-bottom: 0.5rem;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    justify-content: flex-start !important;
-  }
-  
-  .market-rates-grid::-webkit-scrollbar {
-    display: none;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 0.25rem !important;
+    padding: 0 !important;
   }
   
   .market-rates-item {
     border-right: 1px solid rgba(0,0,0,0.05) !important;
-    padding-right: 1.5rem !important;
-    flex-shrink: 0;
+    padding-right: 0.25rem !important;
+    padding-left: 0.25rem !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
   }
 
   .market-rates-item:last-child {
     border-right: none !important;
   }
 
-  .glass-card { border-radius: 20px; padding: 1.5rem !important; }
+  .market-rates-item span:first-child {
+    font-size: 7px !important;
+    letter-spacing: 0;
+    white-space: nowrap;
+    opacity: 0.6;
+  }
+
+  .market-rates-item span:last-child {
+    font-size: 13px !important;
+    font-weight: 900;
+  }
+
+  .glass-card { border-radius: 20px; padding: 2rem !important; }
   .hero-image-frame { border-width: 6px; border-radius: 20px; }
 }
 
