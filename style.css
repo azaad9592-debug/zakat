@@ -130,26 +130,25 @@ h2.font-urdu { line-height: 1.3 !important; }
 /* Responsive Grid Adjustments */
 @media (max-width: 768px) {
   .font-urdu { 
-    font-size: 1.25rem; 
-    line-height: 4.2 !important; /* Global extreme gap for Nastaleeq dots */
-    display: block;
+    font-size: 1.15rem; 
+    line-height: 2.4 !important; /* Balanced gap for Nastaleeq shoshas/dots */
   }
   
   h1.font-urdu {
-    line-height: 6.5 !important; /* Massive gap for hero title to fix 'Adai-gi' overlap */
-    margin-bottom: 4rem !important;
-    padding-top: 4rem !important;
+    line-height: 2.8 !important; /* Professional separation for hero title */
+    margin-bottom: 2rem !important;
+    padding-top: 1rem !important;
   }
 
   h2.font-urdu {
-    line-height: 5.5 !important; /* Gap for calculator/section titles */
-    margin-bottom: 3.5rem !important;
-    padding-top: 3.5rem !important;
+    line-height: 2.6 !important; /* Balanced gap for calculator/section titles */
+    margin-bottom: 1.5rem !important;
+    padding-top: 1rem !important;
   }
 
   p.font-urdu {
-    line-height: 4.2 !important; /* Extreme gap for all paragraphs */
-    margin-bottom: 2rem;
+    line-height: 2.4 !important; /* Neat look for all paragraphs */
+    margin-bottom: 1.5rem;
   }
 
   /* Fix market rates to stay in a PERFECT straight line (3 items) */
