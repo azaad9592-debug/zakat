@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update timestamp
         const now = new Date();
-        elements.lastUpdatedTs.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        elements.lastUpdatedTs.innerText = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
         
         elements.symbols.forEach(s => s.innerText = rate.symbol);
         calculate();
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchRates() {
         const now = new Date();
-        elements.lastUpdatedTs.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        elements.lastUpdatedTs.innerText = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
         
         try {
             // Using a more reliable endpoint for multiple rates
