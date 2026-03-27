@@ -21,6 +21,13 @@
   --card-shadow: 0px 10px 30px rgba(0,0,0,0.05);
 }
 
+/* STRICT INSTRUCTION: Global overflow fix for mobile stability */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
 /* Open from Center Animation */
 @keyframes appEntry {
   0% {
@@ -112,6 +119,14 @@ html {
     background-position: center;
 }
 
+/* Info Bar Style */
+.info-ribbon {
+    background: rgba(7, 141, 91, 0.05);
+    border: 1px dashed rgba(7, 141, 91, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
 /* Precision Urdu Heading Glow */
 .urdu-heading-glow {
     color: white;
@@ -152,88 +167,39 @@ html {
 h1.font-urdu { line-height: 1.2 !important; }
 h2.font-urdu { line-height: 1.3 !important; }
 
-/* Mobile Optimizations */
+/* STRICT INSTRUCTION 4: SAFE Responsive Fixes for Mobile ONLY */
 @media (max-width: 768px) {
-  .font-urdu { 
-    font-size: 1.15rem; 
-    line-height: 2.2 !important; 
-  }
-  
-  h1.font-urdu {
-    line-height: 2.8 !important; 
-    margin-bottom: 2rem !important;
-    padding-top: 1.5rem !important;
+  body {
+    padding: 10px;
+    overflow-x: hidden;
   }
 
-  h2.font-urdu {
-    line-height: 2.2 !important; 
-    margin-bottom: 1.5rem !important;
-    padding-top: 0.5rem !important;
-  }
-
-  p.font-urdu {
-    line-height: 2.2 !important; 
-    margin-bottom: 1.5rem;
-  }
-
-  /* Fixed Ribbon Layout for Premium Look */
-  .market-rates-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.25rem !important;
-    width: 100% !important;
-    padding: 0 !important;
-  }
-  
-  .market-rates-item {
-    border-right: 1px solid rgba(0,0,0,0.08) !important;
-    padding: 0 0.25rem !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    text-align: center;
-  }
-
-  .market-rates-item:last-child {
-    border-right: none !important;
-  }
-
-  .market-rates-item span:first-child {
-    font-size: 7px !important;
-    letter-spacing: 0;
-    white-space: nowrap;
-    opacity: 0.6;
-  }
-
-  .market-rates-item span:last-child {
-    font-size: 13px !important;
-    font-weight: 900;
-  }
-
-  .glass-card { border-radius: 20px; padding: 1.5rem !important; }
-  .hero-image-frame { border-width: 6px; border-radius: 20px; }
-
-  /* Universal Centering & Adjustment */
   .container, .max-w-7xl, .max-w-4xl, .max-w-6xl {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    overflow-x: hidden;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    overflow: hidden;
   }
-  
-  body {
-    overflow-x: hidden;
+
+  input, button {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Preserve original Urdu readability tweaks if safe */
+  .font-urdu { 
+    font-size: 1.1rem; 
+    line-height: 2 !important; 
   }
 }
 
-/* Specific Section Styles */
+/* Restore Specific Section Styles */
 .debt-section {
   border: 1px solid rgba(208, 0, 0, 0.2);
   background: rgba(208, 0, 0, 0.02);
@@ -245,7 +211,7 @@ h2.font-urdu { line-height: 1.3 !important; }
   box-shadow: 0 15px 30px rgba(7, 141, 91, 0.3);
 }
 
-/* Animations */
+/* Animations Reprise */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }

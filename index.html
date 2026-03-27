@@ -209,6 +209,13 @@
     <main id="calculator" class="py-24 px-4 bg-[#F0F7F4]/50 dark:bg-slate-950/20">
         <div class="max-w-7xl mx-auto">
             
+            <!-- Tola Information Bar (Restored) -->
+            <div class="info-ribbon flex flex-col md:flex-row justify-between items-center gap-4 text-center font-urdu mb-10 mx-4">
+                <span class="font-bold text-lg md:text-xl text-slate-700 dark:text-slate-300"><i class="ph-fill ph-scales mr-2 text-primary"></i> 1 تولہ = 11.664 گرام</span>
+                <span class="font-bold text-lg md:text-xl text-slate-700 dark:text-slate-300"><i class="ph-fill ph-sketch-logo mr-2 text-gold"></i> 7.5 تولہ (سونا) = 87.48 گرام</span>
+                <span class="font-bold text-lg md:text-xl text-slate-700 dark:text-slate-300"><i class="ph-fill ph-coins mr-2 text-slate-500"></i> 52.5 تولہ (چاندی) = 612.36 گرام</span>
+            </div>
+
             <div class="text-center mb-16 px-4">
                 <h2 class="text-5xl md:text-6xl font-black font-urdu text-slate-900 dark:text-white mb-6">اسمارٹ <span class="text-gold">زکوٰۃ</span> کیلکولیٹر</h2>
                 <p class="text-xl md:text-2xl font-urdu text-slate-500 dark:text-slate-400 max-w-3xl mx-auto opacity-90">
@@ -349,18 +356,18 @@
                                     <p class="font-urdu text-base md:text-lg font-bold text-red-700 dark:text-red-400 shrink-0">منہا قرضے (Minus Debts)</p>
                                     <p class="text-sm md:text-base font-sans text-red-600 dark:text-red-300 font-bold whitespace-nowrap">Rs <span id="res-debts">0.00</span> -</p>
                                 </div>
-                                <div class="flex flex-row justify-between items-center pb-4 pt-2 border-t-2 border-slate-100 dark:border-slate-800 mt-2 flex-nowrap">
-                                    <p class="font-urdu text-xl md:text-2xl font-black text-slate-950 dark:text-white shrink-0">خالص مالیت (Net Worth)</p>
-                                    <p class="text-xl md:text-2xl font-sans text-primary font-black whitespace-nowrap">Rs <span id="res-net-worth">0.00</span></p>
+                                <div class="flex flex-row justify-between items-center pb-4 pt-2 border-t-2 border-slate-100 dark:border-slate-800 mt-2 flex-wrap md:flex-nowrap">
+                                    <p class="font-urdu text-base md:text-lg font-bold text-slate-950 dark:text-white shrink-0">خالص مالیت (Net Worth)</p>
+                                    <p class="text-sm md:text-base font-sans text-primary font-bold overflow-hidden" style="max-width: 100%;">Rs <span id="res-net-worth" class="break-all">0.00</span></p>
                                 </div>
                             </div>
 
                             <!-- Final Zakat Box -->
-                            <div class="bg-primary rounded-[2rem] p-8 text-white text-center mb-6 shadow-xl relative overflow-hidden group">
+                            <div class="bg-primary rounded-[2rem] p-6 text-white text-center mb-6 shadow-xl relative overflow-hidden group">
                                 <p class="font-urdu text-sm md:text-base font-bold opacity-80 mb-3">واجب الادا زکوٰۃ (Payable)</p>
-                                <div class="flex items-center justify-center gap-3 mb-4">
-                                    <span class="text-5xl md:text-6xl font-black font-sans tracking-tight" id="res-zakat-amount">0.00</span>
-                                    <span class="text-sm font-bold opacity-50">Rs</span>
+                                <div class="flex flex-col items-center justify-center gap-1 mb-4">
+                                    <span class="text-3xl md:text-5xl font-black font-sans tracking-tight break-all" id="res-zakat-amount">0.00</span>
+                                    <span class="text-sm font-bold opacity-70">Rs</span>
                                 </div>
                                 <div class="pt-4 border-t border-white/10 flex justify-center gap-4">
                                     <p class="font-urdu text-xs opacity-70">RATE 2.5% @</p>
