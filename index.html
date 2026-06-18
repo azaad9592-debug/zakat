@@ -20,22 +20,54 @@
     
     <!-- Tailwind & Custom Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=5">
     
-    <!-- MOBILE HEADER GUARANTEE - independent of Tailwind -->
+    <!-- ══ MOBILE HEADER: COMPLETE INLINE CSS (No external deps) ══ -->
     <style>
-      /* Force hide desktop nav on mobile screens */
+      /* ── MOBILE: screens < 768px ── */
       @media (max-width: 767px) {
-        #desktop-nav { display: none !important; visibility: hidden !important; }
-        .header-logo { display: flex !important; visibility: visible !important; opacity: 1 !important; }
-        header { overflow: visible !important; }
-        header > div { overflow: visible !important; }
-        header > div > div { overflow: visible !important; }
+        /* HIDE desktop nav - overrides everything */
+        #desktop-nav {
+          display: none !important;
+          visibility: hidden !important;
+          width: 0 !important;
+          height: 0 !important;
+          overflow: hidden !important;
+          position: absolute !important;
+          pointer-events: none !important;
+        }
+        /* SHOW logo - overrides everything */
+        .header-logo {
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          flex-shrink: 0 !important;
+        }
+        /* SHOW hamburger button */
+        #mobile-menu-btn {
+          display: flex !important;
+          visibility: visible !important;
+        }
+        /* HIDE desktop currency */
+        #currency-selector {
+          display: none !important;
+        }
+        /* Prevent header from clipping */
+        header, header > *, header > * > * {
+          overflow: visible !important;
+          max-width: none !important;
+        }
+        /* Header height on mobile */
+        .header-row {
+          height: 56px !important;
+        }
       }
-      /* Force show desktop nav on desktop */
+      /* ── DESKTOP: screens >= 768px ── */
       @media (min-width: 768px) {
-        #desktop-nav { display: flex !important; }
+        #desktop-nav   { display: flex !important; visibility: visible !important; }
         #mobile-menu-btn { display: none !important; }
+        #currency-selector { display: block !important; }
+        .header-row { height: 80px; }
       }
     </style>
     
@@ -84,30 +116,25 @@
 
     <!-- Header -->
     <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-14 sm:h-20">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8" style="overflow:visible !important;">
+            <!-- dir=ltr so flex order is predictable: left=logo, right=controls -->
+            <div dir="ltr" class="header-row flex items-center justify-between" style="height:56px; overflow:visible !important;">
 
-                <!-- RIGHT side in RTL: Hamburger (mobile) + Currency + Theme -->
-                <div class="flex items-center gap-1.5 sm:gap-4 flex-shrink-0">
-                    <!-- Hamburger: mobile only -->
-                    <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors">
-                        <i class="ph-bold ph-list text-xl"></i>
-                    </button>
-                    <!-- Currency selector: desktop only -->
-                    <select id="currency-selector" class="hidden sm:block bg-slate-100 text-slate-600 border-none rounded-lg px-3 py-1.5 text-xs font-bold focus:ring-1 focus:ring-primary outline-none cursor-pointer">
-                        <option value="PKR" class="text-slate-800">PKR (PK)</option>
-                        <option value="USD" class="text-slate-800">USD ($)</option>
-                        <option value="SAR" class="text-slate-800">SAR (ر.س)</option>
-                    </select>
-                    <!-- Theme toggle: always visible -->
-                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-slate-100">
-                        <i class="ph-bold ph-moon dark:hidden text-lg sm:text-xl"></i>
-                        <i class="ph-bold ph-sun hidden dark:block text-lg sm:text-xl"></i>
-                    </button>
+                <!-- LEFT: Logo - ALWAYS VISIBLE -->
+                <div class="header-logo flex items-center gap-2 flex-shrink-0" style="flex-shrink:0 !important; min-width:max-content; z-index:10; position:relative;">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5 flex-shrink-0">
+                        <img src="zakatease_crescent_logo_v3.png" alt="ZakatEase" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="font-black tracking-tight leading-none" style="font-size:clamp(15px,4vw,24px); white-space:nowrap;">
+                            <span class="text-primary">Zakat</span><span class="text-gold">Ease</span>
+                        </span>
+                        <span class="hidden sm:block text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] mt-0.5">ISLAMIC FINANCE</span>
+                    </div>
                 </div>
 
-                <!-- CENTER: Desktop Nav - hidden on mobile -->
-                <nav id="desktop-nav" class="hidden md:flex items-center gap-8 font-sans text-sm font-semibold text-slate-700">
+                <!-- CENTER: Desktop Nav - hidden on mobile via inline CSS -->
+                <nav id="desktop-nav" class="items-center gap-6 font-sans text-sm font-semibold text-slate-700" style="display:none;">
                     <a href="#" class="hover:text-primary transition-colors">Home</a>
                     <a href="#calculator" class="hover:text-primary transition-colors">Calculator</a>
                     <a href="#sharia-rules" class="hover:text-primary transition-colors">Sharia Rules</a>
@@ -116,22 +143,55 @@
                     <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
                 </nav>
 
-                <!-- LEFT side in RTL: Logo - ALWAYS VISIBLE, NEVER SHRINKS -->
-                <div class="header-logo flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-max">
-                    <div class="flex flex-col text-left">
-                        <span class="text-base sm:text-2xl font-black tracking-tight leading-none">
-                            <span class="text-primary">Zakat</span><span class="text-gold">Ease</span>
-                        </span>
-                        <span class="hidden sm:block text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-0.5">ISLAMIC FINANCE</span>
-                    </div>
-                    <div class="w-8 h-8 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5 flex-shrink-0">
-                        <img src="zakatease_crescent_logo_v3.png" alt="ZakatEase Icon" class="w-full h-full object-contain">
-                    </div>
+                <!-- RIGHT: Controls -->
+                <div class="flex items-center gap-2 flex-shrink-0" style="flex-shrink:0 !important;">
+                    <!-- Hamburger: mobile only (shown via inline CSS) -->
+                    <button id="mobile-menu-btn" class="text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors" style="display:flex;">
+                        <i class="ph-bold ph-list text-xl"></i>
+                    </button>
+                    <!-- Currency: desktop only -->
+                    <select id="currency-selector" class="bg-slate-100 text-slate-600 border-none rounded-lg px-3 py-1.5 text-xs font-bold focus:ring-1 focus:ring-primary outline-none cursor-pointer" style="display:none;">
+                        <option value="PKR">PKR (PK)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="SAR">SAR (ر.س)</option>
+                    </select>
+                    <!-- Theme toggle: always visible -->
+                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-slate-100">
+                        <i class="ph-bold ph-moon dark:hidden text-lg"></i>
+                        <i class="ph-bold ph-sun hidden dark:block text-lg"></i>
+                    </button>
                 </div>
 
             </div>
         </div>
     </header>
+
+    <!-- JS: Enforce mobile header immediately (before CSS loads) -->
+    <script>
+      (function() {
+        function applyHeaderLayout() {
+          var w = window.innerWidth;
+          var nav = document.getElementById('desktop-nav');
+          var ham = document.getElementById('mobile-menu-btn');
+          var cur = document.getElementById('currency-selector');
+          if (!nav) return;
+          if (w < 768) {
+            nav.style.display = 'none';
+            if (ham) ham.style.display = 'flex';
+            if (cur) cur.style.display = 'none';
+          } else {
+            nav.style.display = 'flex';
+            if (ham) ham.style.display = 'none';
+            if (cur) cur.style.display = 'block';
+          }
+        }
+        applyHeaderLayout();
+        window.addEventListener('resize', applyHeaderLayout);
+        // Also run after page fully loads (in case Tailwind overwrites)
+        window.addEventListener('load', applyHeaderLayout);
+        document.addEventListener('DOMContentLoaded', applyHeaderLayout);
+      })();
+    </script>
 
     <!-- Mobile Menu (Slide Down) -->
     <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 animate-fade-down">
