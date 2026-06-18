@@ -167,24 +167,24 @@ html {
 h1.font-urdu { line-height: 1.2 !important; }
 h2.font-urdu { line-height: 1.3 !important; }
 
-/* STRICT INSTRUCTION 4: SAFE Responsive Fixes for Mobile ONLY */
+/* Mobile Responsive Fixes */
 @media (max-width: 768px) {
+  /* No body padding - header must go full width */
   body {
-    padding: 10px;
     overflow-x: hidden;
   }
 
+  /* Containers stay full width */
   .container, .max-w-7xl, .max-w-4xl, .max-w-6xl {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
     overflow: hidden;
   }
 
-  input, button {
+  /* Only form inputs take full width, NOT select/buttons in header */
+  main input[type="number"],
+  main textarea {
     width: 100% !important;
-    margin-bottom: 10px;
   }
 
   img {
@@ -192,10 +192,39 @@ h2.font-urdu { line-height: 1.3 !important; }
     height: auto;
   }
 
-  /* Preserve original Urdu readability tweaks if safe */
+  /* Urdu readability on mobile */
   .font-urdu { 
-    font-size: 1.1rem; 
+    font-size: 1.05rem; 
     line-height: 2 !important; 
+  }
+
+  /* Hero heading smaller on mobile */
+  h1.font-urdu {
+    font-size: 2.5rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Hero image frame smaller on mobile */
+  .hero-image-frame {
+    border-width: 6px;
+    border-radius: 24px;
+  }
+
+  /* Glass pill on mobile */
+  .glass-pill {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+
+  /* Info ribbon stack on mobile */
+  .info-ribbon {
+    text-align: center;
+  }
+
+  /* Market rates smaller on mobile */
+  .market-rates-item {
+    border-right: none !important;
+    padding-right: 0 !important;
   }
 }
 
