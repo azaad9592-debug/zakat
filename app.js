@@ -158,10 +158,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Listeners
     Object.values(elements.inputs).forEach(i => i.addEventListener('input', calculate));
+    
+    // Currency selector: sync desktop + mobile versions
+    const mobileCurrencySelector = document.getElementById('currency-selector-mobile');
+    
     elements.currencySelector.addEventListener('change', (e) => {
         currentCurrency = e.target.value;
+        if (mobileCurrencySelector) mobileCurrencySelector.value = currentCurrency;
         syncUI();
     });
+    
+    if (mobileCurrencySelector) {
+        mobileCurrencySelector.addEventListener('change', (e) => {
+            currentCurrency = e.target.value;
+            elements.currencySelector.value = currentCurrency;
+            syncUI();
+        });
+    }
 
     elements.resetBtn.addEventListener('click', () => {
         Object.values(elements.inputs).forEach(i => i.value = '');

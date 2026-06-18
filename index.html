@@ -68,25 +68,28 @@
     <!-- Header -->
     <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 sm:h-20">
+            <div class="flex justify-between items-center h-14 sm:h-20">
 
-                <!-- Actions (Right Side in RTL) -->
-                <div class="flex items-center gap-2 sm:gap-4">
-                    <select id="currency-selector" class="bg-slate-100 text-slate-600 border-none rounded-lg px-2 py-1 sm:px-3 sm:py-1.5 text-xs font-bold focus:ring-1 focus:ring-primary outline-none cursor-pointer">
-                        <option value="PKR" class="text-slate-800">PKR</option>
-                        <option value="USD" class="text-slate-800">USD</option>
-                        <option value="SAR" class="text-slate-800">SAR</option>
+                <!-- RIGHT side in RTL: Hamburger (mobile) + Currency + Theme -->
+                <div class="flex items-center gap-1.5 sm:gap-4 flex-shrink-0">
+                    <!-- Hamburger: mobile only -->
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                        <i class="ph-bold ph-list text-xl"></i>
+                    </button>
+                    <!-- Currency selector: desktop only -->
+                    <select id="currency-selector" class="hidden sm:block bg-slate-100 text-slate-600 border-none rounded-lg px-3 py-1.5 text-xs font-bold focus:ring-1 focus:ring-primary outline-none cursor-pointer">
+                        <option value="PKR" class="text-slate-800">PKR (PK)</option>
+                        <option value="USD" class="text-slate-800">USD ($)</option>
+                        <option value="SAR" class="text-slate-800">SAR (ر.س)</option>
                     </select>
-                    <button id="theme-toggle" class="p-1.5 sm:p-2 text-slate-400 hover:text-primary transition-colors">
+                    <!-- Theme toggle: always visible -->
+                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-primary transition-colors rounded-lg hover:bg-slate-100">
                         <i class="ph-bold ph-moon dark:hidden text-lg sm:text-xl"></i>
                         <i class="ph-bold ph-sun hidden dark:block text-lg sm:text-xl"></i>
                     </button>
-                    <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-1.5">
-                        <i class="ph-bold ph-list text-2xl"></i>
-                    </button>
                 </div>
 
-                <!-- Desktop Nav (English) - Center -->
+                <!-- CENTER: Desktop Nav - hidden on mobile -->
                 <nav class="hidden md:flex items-center gap-8 font-sans text-sm font-semibold text-slate-700">
                     <a href="#" class="hover:text-primary transition-colors">Home</a>
                     <a href="#calculator" class="hover:text-primary transition-colors">Calculator</a>
@@ -96,15 +99,15 @@
                     <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
                 </nav>
 
-                <!-- Logo (Left Side in RTL) - Always Visible -->
-                <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-                    <div class="flex flex-col -space-y-0.5 text-left">
-                        <span class="text-lg sm:text-2xl font-black tracking-tight leading-tight">
+                <!-- LEFT side in RTL: Logo - ALWAYS VISIBLE, NEVER SHRINKS -->
+                <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-max">
+                    <div class="flex flex-col text-left">
+                        <span class="text-base sm:text-2xl font-black tracking-tight leading-none">
                             <span class="text-primary">Zakat</span><span class="text-gold">Ease</span>
                         </span>
-                        <span class="hidden sm:block text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em]">ISLAMIC FINANCE</span>
+                        <span class="hidden sm:block text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-0.5">ISLAMIC FINANCE</span>
                     </div>
-                    <div class="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5 flex-shrink-0">
+                    <div class="w-8 h-8 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center shadow-md overflow-hidden p-0.5 flex-shrink-0">
                         <img src="zakatease_crescent_logo_v3.png" alt="ZakatEase Icon" class="w-full h-full object-contain">
                     </div>
                 </div>
@@ -113,14 +116,26 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 p-6 space-y-4 font-urdu text-xl font-bold animate-fade-down">
-        <a href="#" class="block hover:text-primary transition-colors text-right">ہوم</a>
-        <a href="#calculator" class="block hover:text-primary transition-colors text-right">کیلکولیٹر</a>
-        <a href="#sharia-rules" class="block hover:text-primary transition-colors text-right">شرعی اصول</a>
-        <a href="#quran-hadith" class="block hover:text-primary transition-colors text-right">قرآن و حدیث</a>
-        <a href="#faq" class="block hover:text-primary transition-colors text-right">سوالات</a>
-        <a href="#contact" class="block hover:text-primary transition-colors text-right">رابطہ کریں</a>
+    <!-- Mobile Menu (Slide Down) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 animate-fade-down">
+        <!-- Currency Selector Row (mobile only) -->
+        <div class="px-5 pt-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 text-right">کرنسی منتخب کریں</label>
+            <select id="currency-selector-mobile" class="w-full bg-slate-100 text-slate-700 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-primary outline-none cursor-pointer">
+                <option value="PKR">PKR - پاکستانی روپیہ</option>
+                <option value="USD">USD - امریکی ڈالر</option>
+                <option value="SAR">SAR - سعودی ریال</option>
+            </select>
+        </div>
+        <!-- Nav Links -->
+        <div class="px-5 py-4 space-y-1">
+            <a href="#" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">ہوم <i class="ph ph-house text-primary"></i></a>
+            <a href="#calculator" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">کیلکولیٹر <i class="ph ph-calculator text-primary"></i></a>
+            <a href="#sharia-rules" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">شرعی اصول <i class="ph ph-book text-primary"></i></a>
+            <a href="#quran-hadith" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">قرآن و حدیث <i class="ph ph-mosque text-primary"></i></a>
+            <a href="#faq" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">سوالات <i class="ph ph-question text-primary"></i></a>
+            <a href="#contact" class="flex items-center justify-end gap-3 py-3 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-colors font-urdu text-lg font-bold text-right">رابطہ کریں <i class="ph ph-envelope text-primary"></i></a>
+        </div>
     </div>
 
     <!-- Hero Section (Strict Screenshot Match) -->
